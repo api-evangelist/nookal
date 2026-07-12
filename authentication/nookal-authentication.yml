@@ -1,0 +1,32 @@
+generated: '2026-07-12'
+method: probed
+source: openapi/nookal-openapi.yml + live probes of https://api.nookal.com/production/v2/
+summary:
+  types:
+  - apiKey
+schemes:
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameterName: api_key
+  scheme: api-key
+  description: >-
+    Nookal authenticates every request with an account-issued API key passed as
+    the `api_key` parameter - in the query string for GET requests and as a form
+    field for POST requests. The key is created inside the Nookal application
+    (Setup / Integrations), where the account owner assigns it a configurable
+    access level. Confirmed live: calling
+    https://api.nookal.com/production/v2/verify without a key returns
+    `{"status":"failure","details":{"errorCode":"L000_1","alerts":["Missing
+    variable: api_key"]}}`. There is no OAuth flow; the API key is the sole
+    credential. API access is available on the paid Professional and Enterprise
+    plans.
+  sources:
+  - https://api.nookal.com/developers
+  - https://api.nookal.com/dev/reference/verify
+  - openapi/nookal-openapi.yml
+notes: >-
+  The api_key requirement was confirmed against the live production host. The
+  key is transmitted as a request parameter over HTTPS (TLS), not in an
+  Authorization header. Treat the key as a secret and scope its access level in
+  the Nookal application to the minimum required.

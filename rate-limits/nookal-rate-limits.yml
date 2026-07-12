@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Nookal
+providerId: nookal
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Practice Management
+- Allied Health
+- Rate Limiting
+- Pagination
+- Quotas
+description: >-
+  Nookal does not publish fixed numeric rate limits for its production API in the
+  public developer reference. Throughput on read endpoints is instead governed by
+  pagination - each list call accepts `page` and `page_length`, and the response
+  `details` object reports `totalItems`, `currentItems`, `currentPage`, and
+  `nextPage` so clients page through large result sets. Incremental endpoints
+  accept a `last_modified` filter to fetch only changed records, which is the
+  intended pattern for keeping an external system in sync without re-pulling
+  everything. No per-minute or per-day request cap is documented as of the review
+  date.
+notes: >-
+  Numeric per-account or per-endpoint request limits are not documented at
+  https://api.nookal.com/developers as of 2026-07-12. Clients should page with
+  page_length, use last_modified for incremental sync, and implement exponential
+  backoff on transient failures. Contact Nookal support to confirm any account- or
+  plan-level throughput ceilings before running high-volume integrations.
+sources:
+- https://api.nookal.com/developers
+- https://api.nookal.com/dev/reference/patient
+- https://api.nookal.com/dev/objects/response
+responseCodes:
+  success: 200
+  failureEnvelope: status=failure
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Nookal production API.
+- name: List Pagination
+  scope: request
+  metric: items
+  limit: configurable via page_length
+  notes: List endpoints return page_length items per page (default around 100); page through results using page and the response nextPage value.
+- name: Incremental Sync
+  scope: request
+  metric: records
+  limit: filtered by last_modified
+  notes: Many read endpoints accept last_modified to return only records changed since a timestamp, reducing repeated full pulls.
+policies:
+- name: Pagination
+  description: Read endpoints paginate via page and page_length; details.totalItems and details.nextPage drive iteration.
+- name: Incremental Retrieval
+  description: Use the last_modified filter to sync only changed patients, cases, treatment notes, appointments, and invoices.
+- name: Backoff
+  description: On failure responses (status=failure) or transient errors, retry with exponential backoff rather than tight-looping.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

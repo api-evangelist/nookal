@@ -1,0 +1,139 @@
+aid: nookal
+name: Nookal
+review:
+  question: Does Nookal expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Nookal's public developer surface is a
+    request/response REST API at https://api.nookal.com/production/v2/ returning
+    a JSON status envelope. There is no documented server-push transport
+    (WebSocket or SSE) on Nookal's API to model. Integrations keep external
+    systems in sync by polling read endpoints with the last_modified filter, not
+    by subscribing to a realtime stream, so there is no wss:// surface for an
+    AsyncAPI document.
+findings:
+  summary: |
+    Nookal does not publish a documented public WebSocket API. Nookal is
+    Australian-built practice management software for allied health clinics. Its
+    developer API (base https://api.nookal.com/production/v2/) is a
+    request/response REST API authenticated with an account-issued API key passed
+    as the `api_key` parameter, returning a JSON envelope of the form
+    {"status":"success"|"failure","data":{...},"details":{...}}. Read endpoints
+    (getPatients, getAppointments, getInvoices, etc.) are paginated and support a
+    last_modified incremental filter. No realtime, bidirectional, or streaming
+    WebSocket (ws:// or wss://) endpoint is documented anywhere in Nookal's API
+    reference as of the review date.
+  webSocketPrecision: false
+  webSocketNote: |
+    WebSocket precision is false: Nookal's own API is REST-only. No wss:// URL is
+    documented or advertised. The answer to the review question is therefore
+    false, and no asyncapi/ directory was created.
+  accessModel: |
+    Self-serve within the product, gated by plan. An account admin creates an API
+    key inside the Nookal application (Setup / Integrations) and assigns it an
+    access level. API access is available on the paid Professional and Enterprise
+    plans, not on entry-level Essentials. There is no separate public developer
+    portal signup and no OAuth flow - the API key is the sole credential.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.nookal.com/production/v2
+      documented: true
+      note: >-
+        Production REST API. GET for reads (api_key in query string), POST
+        (application/x-www-form-urlencoded, api_key as a form field) for writes
+        and for the invoice read endpoints. JSON status envelope.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Nookal's API reference as of the review date.
+  endpointsConfirmedLive:
+    - GET  https://api.nookal.com/production/v2/verify
+    - GET  https://api.nookal.com/production/v2/getLocations
+    - GET  https://api.nookal.com/production/v2/getPatients
+  endpointsConfirmedLiveNote: |
+    These three were probed live against the production host on 2026-07-12; each
+    returned Nookal's JSON status envelope and, without a key, the failure alert
+    "Missing variable: api_key" (verify errorCode L000_1, getLocations errorCode
+    L003), confirming both the base host and the api_key auth requirement.
+  endpointsDocumentedModeled:
+    - GET  /production/v2/searchPatients
+    - GET  /production/v2/getCases
+    - GET  /production/v2/getAllCases
+    - POST /production/v2/addPatient
+    - POST /production/v2/editPatient
+    - GET  /production/v2/getTreatmentNotes
+    - GET  /production/v2/getAllTreatmentNotes
+    - POST /production/v2/addTreatmentNote
+    - GET  /production/v2/getPatientFiles
+    - GET  /production/v2/getFileUrl
+    - POST /production/v2/addCase
+    - POST /production/v2/updatePatientMedicareDetails
+    - GET  /production/v2/getPractitioners
+    - GET  /production/v2/getAppointmentTypes
+    - GET  /production/v2/getClassTypes
+    - GET  /production/v2/getStockList
+    - GET  /production/v2/getAppointments
+    - GET  /production/v2/getAppointmentAvailabilities
+    - GET  /production/v2/getClassAvailabilities
+    - POST /production/v2/addAppointmentBooking
+    - POST /production/v2/updateAppointmentBooking
+    - POST /production/v2/addClassBooking
+    - POST /production/v2/cancelAppointment
+    - POST /production/v2/rebookAppointment
+    - GET  /production/v2/getClassParticipants
+    - GET  /production/v2/getWaitingList
+    - POST /production/v2/getInvoices
+    - POST /production/v2/getInvoice
+    - POST /production/v2/addInvoice
+    - POST /production/v2/addPaymentToInvoice
+    - POST /production/v2/getInvoicePayments
+  endpointsDocumentedModeledNote: |
+    Paths, HTTP methods, and parameter names above are taken from Nookal's public
+    API reference (https://api.nookal.com/dev/reference/*). They were NOT each
+    exercised against a live account (that requires a paid key), and Nookal does
+    not publish a machine-readable OpenAPI document, so the request/response body
+    SHAPES in the authored OpenAPI are modeled from the documented object
+    reference and the confirmed live envelope. Treat field-level schemas as
+    modeled pending verification against a live account.
+sources:
+  - url: https://api.nookal.com/developers
+    type: Documentation
+    note: Developer hub linking the reference and object pages; states an API key with a configurable access level is created in-app.
+  - url: https://api.nookal.com/dev/reference/patient
+    type: APIReference
+    note: Patients, cases, treatment notes, and files endpoints with parameters.
+  - url: https://api.nookal.com/dev/reference/appointment
+    type: APIReference
+    note: Appointments, bookings, availabilities, class participants, and waiting list endpoints.
+  - url: https://api.nookal.com/dev/reference/location
+    type: APIReference
+    note: Locations, practitioners, appointment/class types, and stock list endpoints.
+  - url: https://api.nookal.com/dev/reference/invoices
+    type: APIReference
+    note: Invoice, item, payment, credit, discount, and refund endpoints (POST).
+  - url: https://api.nookal.com/dev/reference/verify
+    type: APIReference
+    note: Verify endpoint and API key authentication.
+  - url: https://api.nookal.com/dev/objects/response
+    type: Documentation
+    note: Response envelope - status, error fields, and pagination (currentPage, nextPage, pageLength, totalItems).
+  - url: https://www.nookal.com/pricing
+    type: Pricing
+    note: Per-practitioner plans; API access gated to Professional and Enterprise.
+  - url: https://api.nookal.com/production/v2/verify
+    type: LiveProbe
+    note: 'Live probe 2026-07-12 - returned JSON failure envelope with "Missing variable: api_key" (errorCode L000_1).'
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists - Nookal's own public API is
+    request/response REST over HTTPS with a JSON status envelope. No AsyncAPI
+    document was created because there is no server-push transport on Nookal's API
+    to model. The apis.yml catalogs the REST surface across five API entries
+    (Patients, Appointments, Clinic, Invoices, Verification) with OpenAPI and
+    collection artifacts.

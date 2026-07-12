@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nookal API",
+    "version": "v2",
+    "description": "REST API for Nookal allied-health practice management software. Base URL https://api.nookal.com/production/v2. Authenticated with an account-issued API key passed as the api_key parameter (query string for GET, form field for POST). Responses use a JSON envelope: {\"status\":\"success\"|\"failure\",\"data\":{...},\"details\":{...}}. Endpoint paths grounded in the Nookal API reference; verify, getLocations, and getPatients confirmed live."
+  },
+  "items": [
+    {
+      "info": { "name": "Verification", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Verify API key", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/verify?api_key={{apiKey}}" },
+          "docs": "Verifies that the supplied API key is valid and connected to a Nookal account. Confirmed live."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Clinic", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get locations", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getLocations?api_key={{apiKey}}" },
+          "docs": "Retrieves the clinic locations for the account. Confirmed live."
+        },
+        {
+          "info": { "name": "Get practitioners", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getPractitioners?api_key={{apiKey}}" },
+          "docs": "Retrieves the practitioners for the account."
+        },
+        {
+          "info": { "name": "Get appointment types", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getAppointmentTypes?api_key={{apiKey}}" },
+          "docs": "Retrieves the appointment types configured for the account."
+        },
+        {
+          "info": { "name": "Get class types", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getClassTypes?api_key={{apiKey}}" },
+          "docs": "Retrieves the class types configured for the account."
+        },
+        {
+          "info": { "name": "Get stock list", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getStockList?api_key={{apiKey}}" },
+          "docs": "Retrieves the stock/inventory items for the account."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Patients", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get patients", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getPatients?api_key={{apiKey}}&page=1&page_length=100" },
+          "docs": "Lists patients in the account (paginated). Confirmed live."
+        },
+        {
+          "info": { "name": "Search patients", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/searchPatients?api_key={{apiKey}}&last_name=Smith&first_name=John&fuzzy_search=true" },
+          "docs": "Searches patients by name, email + DOB, patient_id, or online_code."
+        },
+        {
+          "info": { "name": "Get cases for a patient", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getCases?api_key={{apiKey}}&patient_id=1" },
+          "docs": "Retrieves the cases for a patient."
+        },
+        {
+          "info": { "name": "Add a patient", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addPatient",
+            "body": { "type": "urlencoded", "data": "api_key={{apiKey}}&first_name=John&last_name=Smith&date_of_birth=1990-01-01" }
+          },
+          "docs": "Creates a new patient record. first_name, last_name, and date_of_birth are required."
+        },
+        {
+          "info": { "name": "Get treatment notes for a patient", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getTreatmentNotes?api_key={{apiKey}}&patient_id=1" },
+          "docs": "Retrieves treatment notes for a patient."
+        },
+        {
+          "info": { "name": "Add a treatment note", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addTreatmentNote",
+            "body": { "type": "urlencoded", "data": "api_key={{apiKey}}&patient_id=1&case_id=1&practitioner_id=1&date=2026-07-12&notes=Patient+reported+improvement." }
+          },
+          "docs": "Adds a treatment note to a patient case."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Appointments", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get appointments", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getAppointments?api_key={{apiKey}}&date_from=2026-07-01&date_to=2026-07-31" },
+          "docs": "Retrieves appointments, optionally filtered by date range, location, patient, or practitioner."
+        },
+        {
+          "info": { "name": "Get appointment availabilities", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getAppointmentAvailabilities?api_key={{apiKey}}&practitioner_id=1&date_from=2026-07-01&date_to=2026-07-07" },
+          "docs": "Retrieves available appointment slots for a practitioner over a date range."
+        },
+        {
+          "info": { "name": "Add an appointment booking", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addAppointmentBooking",
+            "body": { "type": "urlencoded", "data": "api_key={{apiKey}}&location_id=1&appointment_date=2026-07-15&start_time=09:00&patient_id=1&practitioner_id=1&appointment_type_id=1" }
+          },
+          "docs": "Creates a new appointment booking."
+        },
+        {
+          "info": { "name": "Cancel an appointment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/cancelAppointment",
+            "body": { "type": "urlencoded", "data": "api_key={{apiKey}}&appointment_id=1&patient_id=1" }
+          },
+          "docs": "Cancels an existing appointment."
+        },
+        {
+          "info": { "name": "Get waiting list", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.nookal.com/production/v2/getWaitingList?api_key={{apiKey}}" },
+          "docs": "Retrieves the appointment waiting list."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Invoices", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get invoices", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/getInvoices",
+            "body": { "type": "urlencoded", "data": "api_key={{apiKey}}&patient_id=1" }
+          },
+          "docs": "Retrieves invoices, optionally filtered by patient."
+        },
+        {
+          "info": { "name": "Add an invoice", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addInvoice",
+            "body": { "type": "urlencoded", "data": "api_key={{apiKey}}&location_id=1&patient_id=1&date=2026-07-12" }
+          },
+          "docs": "Creates a new invoice for a patient at a location."
+        },
+        {
+          "info": { "name": "Add a payment to an invoice", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addPaymentToInvoice",
+            "body": { "type": "urlencoded", "data": "api_key={{apiKey}}&invoice_id=1&method=card&amount=89.00&date=2026-07-12" }
+          },
+          "docs": "Records a payment against an invoice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

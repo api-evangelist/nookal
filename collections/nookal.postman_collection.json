@@ -1,0 +1,263 @@
+{
+  "info": {
+    "name": "Nookal API",
+    "description": "REST API for Nookal allied-health practice management software. Base URL: https://api.nookal.com/production/v2. Authenticated with an account-issued API key passed as the api_key parameter (query string for GET, form field for POST). Responses use a JSON envelope: {\"status\":\"success\"|\"failure\",\"data\":{...},\"details\":{...}}. Endpoint paths grounded in the Nookal API reference (https://api.nookal.com/dev); verify, getLocations, and getPatients confirmed live. Request bodies are modeled from the documented object reference.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.nookal.com/production/v2", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Verification",
+      "item": [
+        {
+          "name": "Verify API key",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/verify?api_key={{apiKey}}", "host": ["{{baseUrl}}"], "path": ["verify"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }] },
+            "description": "Verifies that the supplied API key is valid and connected to a Nookal account. Confirmed live."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Clinic",
+      "item": [
+        {
+          "name": "Get locations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getLocations?api_key={{apiKey}}", "host": ["{{baseUrl}}"], "path": ["getLocations"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }] },
+            "description": "Retrieves the clinic locations for the account. Confirmed live."
+          }
+        },
+        {
+          "name": "Get practitioners",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getPractitioners?api_key={{apiKey}}", "host": ["{{baseUrl}}"], "path": ["getPractitioners"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }] },
+            "description": "Retrieves the practitioners for the account."
+          }
+        },
+        {
+          "name": "Get appointment types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getAppointmentTypes?api_key={{apiKey}}", "host": ["{{baseUrl}}"], "path": ["getAppointmentTypes"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }] },
+            "description": "Retrieves the appointment types configured for the account."
+          }
+        },
+        {
+          "name": "Get class types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getClassTypes?api_key={{apiKey}}", "host": ["{{baseUrl}}"], "path": ["getClassTypes"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }] },
+            "description": "Retrieves the class types configured for the account."
+          }
+        },
+        {
+          "name": "Get stock list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getStockList?api_key={{apiKey}}", "host": ["{{baseUrl}}"], "path": ["getStockList"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }] },
+            "description": "Retrieves the stock/inventory items for the account."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Patients",
+      "item": [
+        {
+          "name": "Get patients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getPatients?api_key={{apiKey}}&page=1&page_length=100", "host": ["{{baseUrl}}"], "path": ["getPatients"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }, { "key": "page", "value": "1" }, { "key": "page_length", "value": "100" }] },
+            "description": "Lists patients in the account (paginated). Confirmed live."
+          }
+        },
+        {
+          "name": "Search patients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/searchPatients?api_key={{apiKey}}&last_name=Smith&first_name=John&fuzzy_search=true", "host": ["{{baseUrl}}"], "path": ["searchPatients"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }, { "key": "last_name", "value": "Smith" }, { "key": "first_name", "value": "John" }, { "key": "fuzzy_search", "value": "true" }] },
+            "description": "Searches patients by name, email + DOB, patient_id, or online_code."
+          }
+        },
+        {
+          "name": "Get cases for a patient",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getCases?api_key={{apiKey}}&patient_id=1", "host": ["{{baseUrl}}"], "path": ["getCases"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }, { "key": "patient_id", "value": "1" }] },
+            "description": "Retrieves the cases for a patient."
+          }
+        },
+        {
+          "name": "Add a patient",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [
+              { "key": "api_key", "value": "{{apiKey}}" },
+              { "key": "first_name", "value": "John" },
+              { "key": "last_name", "value": "Smith" },
+              { "key": "date_of_birth", "value": "1990-01-01" }
+            ] },
+            "url": { "raw": "{{baseUrl}}/addPatient", "host": ["{{baseUrl}}"], "path": ["addPatient"] },
+            "description": "Creates a new patient record. first_name, last_name, and date_of_birth are required."
+          }
+        },
+        {
+          "name": "Get treatment notes for a patient",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getTreatmentNotes?api_key={{apiKey}}&patient_id=1", "host": ["{{baseUrl}}"], "path": ["getTreatmentNotes"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }, { "key": "patient_id", "value": "1" }] },
+            "description": "Retrieves treatment notes for a patient."
+          }
+        },
+        {
+          "name": "Add a treatment note",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [
+              { "key": "api_key", "value": "{{apiKey}}" },
+              { "key": "patient_id", "value": "1" },
+              { "key": "case_id", "value": "1" },
+              { "key": "practitioner_id", "value": "1" },
+              { "key": "date", "value": "2026-07-12" },
+              { "key": "notes", "value": "Patient reported improvement." }
+            ] },
+            "url": { "raw": "{{baseUrl}}/addTreatmentNote", "host": ["{{baseUrl}}"], "path": ["addTreatmentNote"] },
+            "description": "Adds a treatment note to a patient case."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "Get appointments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getAppointments?api_key={{apiKey}}&date_from=2026-07-01&date_to=2026-07-31", "host": ["{{baseUrl}}"], "path": ["getAppointments"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }, { "key": "date_from", "value": "2026-07-01" }, { "key": "date_to", "value": "2026-07-31" }] },
+            "description": "Retrieves appointments, optionally filtered by date range, location, patient, or practitioner."
+          }
+        },
+        {
+          "name": "Get appointment availabilities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getAppointmentAvailabilities?api_key={{apiKey}}&practitioner_id=1&date_from=2026-07-01&date_to=2026-07-07", "host": ["{{baseUrl}}"], "path": ["getAppointmentAvailabilities"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }, { "key": "practitioner_id", "value": "1" }, { "key": "date_from", "value": "2026-07-01" }, { "key": "date_to", "value": "2026-07-07" }] },
+            "description": "Retrieves available appointment slots for a practitioner over a date range."
+          }
+        },
+        {
+          "name": "Add an appointment booking",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [
+              { "key": "api_key", "value": "{{apiKey}}" },
+              { "key": "location_id", "value": "1" },
+              { "key": "appointment_date", "value": "2026-07-15" },
+              { "key": "start_time", "value": "09:00" },
+              { "key": "patient_id", "value": "1" },
+              { "key": "practitioner_id", "value": "1" },
+              { "key": "appointment_type_id", "value": "1" }
+            ] },
+            "url": { "raw": "{{baseUrl}}/addAppointmentBooking", "host": ["{{baseUrl}}"], "path": ["addAppointmentBooking"] },
+            "description": "Creates a new appointment booking."
+          }
+        },
+        {
+          "name": "Cancel an appointment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [
+              { "key": "api_key", "value": "{{apiKey}}" },
+              { "key": "appointment_id", "value": "1" },
+              { "key": "patient_id", "value": "1" }
+            ] },
+            "url": { "raw": "{{baseUrl}}/cancelAppointment", "host": ["{{baseUrl}}"], "path": ["cancelAppointment"] },
+            "description": "Cancels an existing appointment."
+          }
+        },
+        {
+          "name": "Get waiting list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getWaitingList?api_key={{apiKey}}", "host": ["{{baseUrl}}"], "path": ["getWaitingList"], "query": [{ "key": "api_key", "value": "{{apiKey}}" }] },
+            "description": "Retrieves the appointment waiting list."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "Get invoices",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [
+              { "key": "api_key", "value": "{{apiKey}}" },
+              { "key": "patient_id", "value": "1" }
+            ] },
+            "url": { "raw": "{{baseUrl}}/getInvoices", "host": ["{{baseUrl}}"], "path": ["getInvoices"] },
+            "description": "Retrieves invoices, optionally filtered by patient."
+          }
+        },
+        {
+          "name": "Add an invoice",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [
+              { "key": "api_key", "value": "{{apiKey}}" },
+              { "key": "location_id", "value": "1" },
+              { "key": "patient_id", "value": "1" },
+              { "key": "date", "value": "2026-07-12" }
+            ] },
+            "url": { "raw": "{{baseUrl}}/addInvoice", "host": ["{{baseUrl}}"], "path": ["addInvoice"] },
+            "description": "Creates a new invoice for a patient at a location."
+          }
+        },
+        {
+          "name": "Add a payment to an invoice",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [
+              { "key": "api_key", "value": "{{apiKey}}" },
+              { "key": "invoice_id", "value": "1" },
+              { "key": "method", "value": "card" },
+              { "key": "amount", "value": "89.00" },
+              { "key": "date", "value": "2026-07-12" }
+            ] },
+            "url": { "raw": "{{baseUrl}}/addPaymentToInvoice", "host": ["{{baseUrl}}"], "path": ["addPaymentToInvoice"] },
+            "description": "Records a payment against an invoice."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+generated: '2026-07-12'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + API hosts
+hosts:
+- host: api.nookal.com
+  https: true
+  tls_version: TLSv1.2
+  cert_issuer: GoDaddy.com, Inc.
+  cert_expires: Mar 10 01:17:07 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  server: Apache
+  api_live: true
+  api_note: https://api.nookal.com/production/v2/verify returns a JSON status envelope; requires api_key.
+- host: www.nookal.com
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GoDaddy.com, Inc.
+  cert_expires: Mar 10 01:17:07 2027 GMT
+  hsts: true
+  hsts_max_age: 10886400
+  hsts_include_subdomains: true
+  server: AmazonS3 via CloudFront
+domains:
+- domain: nookal.com
+  dnssec: false
+  caa:
+  - 0 issue "amazon.com"
+  - 0 issue "godaddy.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog"
+  - 0 issue "starfieldtech.com"
+  - 0 issuewild "amazon.com"
+  - 0 issuewild "godaddy.com"
+  - 0 issuewild "letsencrypt.org"
+  - 0 issuewild "starfieldtech.com"
+  spf: true
+  spf_record: v=spf1 include:amazonses.com include:_spf.google.com include:mail.zendesk.com include:441562201.spf08.hubspotemail.net ~all
+  dmarc: true
+  dmarc_policy: reject
+notes: >-
+  Probes run 2026-07-12. api.nookal.com serves the production REST API over HTTPS
+  with HSTS (max-age 31536000, includeSubDomains) and a GoDaddy-issued certificate;
+  TLS negotiated at 1.2. www.nookal.com is served from Amazon S3 behind CloudFront
+  with HSTS and TLS 1.3. The nookal.com domain publishes SPF and a strict DMARC
+  policy (p=reject) and a CAA record set, but no DNSSEC DS record was found.

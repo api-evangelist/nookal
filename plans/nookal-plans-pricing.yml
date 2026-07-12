@@ -1,0 +1,121 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Nookal
+providerId: nookal
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Practice Management
+- Allied Health
+- SaaS
+- Plans
+- Pricing
+description: >-
+  Nookal is sold as a per-practitioner monthly SaaS subscription with three
+  published tiers - Essentials, Professional, and Enterprise - priced in AUD, GBP,
+  EUR, and USD, plus optional add-ons. API access is NOT part of the entry
+  Essentials tier; it is included on the paid Professional and Enterprise plans.
+  Billing is per active practitioner per month, with small per-practitioner
+  discounts in larger bands, quoted excluding GST. Prices below were read from the
+  Nookal pricing page on 2026-07-12 and are not reconciled against a signed
+  quote; verify current rates before relying on them.
+notes: >-
+  Per-practitioner prices (per month): Essentials AUD $49 / GBP GBP29 / EUR EUR65
+  / USD $65; Professional AUD $59 / GBP GBP39 / EUR EUR89 / USD $89; Enterprise is
+  contact-sales. Usage-metered extras exist outside the seat price - SMS from
+  about 10 cents per message and Medicare claiming about 30 cents per successful
+  claim - and are billed on top. Add-ons: AI + Voice about $25 per active licence
+  per month, Patient Portal from about $10 per active location per month, Single
+  Sign-On from about $5 per active licence per month, Secure Messaging from about
+  $1.50 per user per month. The API itself carries no separate per-call fee; it is
+  gated by plan tier.
+sources:
+- https://www.nookal.com/pricing
+- https://www.nookal.com/features
+- https://api.nookal.com/developers
+plans:
+- id: nookal-essentials
+  name: Essentials
+  type: paid
+  description: >-
+    Core tools to get a clinic running - online booking, multi-practitioner
+    scheduling, patient records, invoicing, bulk billing, SMS/email reminders,
+    basic reporting, and intake forms. Does NOT include API access.
+  entries:
+  - label: Per Practitioner
+    name: essentials_seat
+    type: flat
+    metric: practitioner
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: AUD
+    price: AUD $49 per practitioner / month (ex GST); GBP29 / EUR65 / USD $65
+    userMultiplied: true
+  elements:
+  - name: Online Booking
+  - name: Multi-Practitioner Scheduling
+  - name: Patient Records
+  - name: Invoicing and Bulk Billing
+  - name: SMS and Email Reminders
+  - name: Basic Reporting
+- id: nookal-professional
+  name: Professional
+  type: paid
+  description: >-
+    The full Nookal experience for growing clinics - everything in Essentials
+    plus advanced reporting, customizable forms, automated recalls, two-way SMS,
+    invoice automation, debt reminders, quoting, and bulk messaging. Includes API
+    access.
+  entries:
+  - label: Per Practitioner
+    name: professional_seat
+    type: flat
+    metric: practitioner
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: AUD
+    price: AUD $59 per practitioner / month (ex GST); GBP39 / EUR89 / USD $89
+    userMultiplied: true
+  elements:
+  - name: Everything in Essentials
+  - name: API Access
+  - name: Advanced Reporting
+  - name: Customizable Forms
+  - name: Automated Recalls
+  - name: Two-Way SMS
+  - name: Invoice Automation
+- id: nookal-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Advanced, tailored solutions for larger organisations - everything in
+    Professional plus multi-account management, custom integrations, a dedicated
+    account manager, invoice locking, custom onboarding, and SLA-backed support.
+    Includes API access.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Everything in Professional
+  - name: API Access
+  - name: Multi-Account Management
+  - name: Custom Integrations
+  - name: Dedicated Account Manager
+  - name: SLA-Backed Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

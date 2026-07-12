@@ -1,0 +1,106 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Nookal
+providerId: nookal
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Practice Management
+- Allied Health
+- SaaS
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Nookal spend. Nookal is a per-practitioner monthly SaaS
+  subscription: the dominant cost is the number of active practitioner seats
+  times the plan rate (Essentials, Professional, or Enterprise), billed monthly.
+  API access is not a separately metered product - it is a feature gated to the
+  Professional and Enterprise tiers, so the API carries no per-call invoice line
+  of its own. Variable, usage-metered costs sit alongside the seat fee: SMS
+  messaging (from around 10 cents per message), Medicare claiming (around 30 cents
+  per successful claim), and optional add-ons (AI + Voice, Patient Portal, Single
+  Sign-On, Secure Messaging) billed per licence, location, or user. This model is
+  modeled honestly from the public pricing page and is not reconciled against a
+  Nookal invoice or FOCUS export.
+notes: >-
+  Per-unit rates and add-on prices were read from the Nookal pricing page on
+  2026-07-12 and may change; verify during reconciliation. Nookal does not publish
+  a FOCUS-formatted billing export, so the meters below are modeled cost drivers,
+  not columns from an actual invoice. The API's cost is entirely indirect - it is
+  the price of holding a Professional-or-above seat - so integration spend is
+  governed by seat count and by the usage-metered SMS/Medicare/add-on lines the
+  integration triggers.
+sources:
+- https://www.nookal.com/pricing
+- https://www.nookal.com/features
+- https://api.nookal.com/developers
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Nookal
+serviceCategory: Practice Management Software
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: AUD
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: Nookal Practice Management
+  ServiceCategory: Practice Management Software
+  ProviderName: Nookal
+  PublisherName: Nookal
+  InvoiceIssuerName: Nookal
+  BillingCurrency: AUD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: practitioner_seats
+  description: Active practitioner seats billed per month at the plan rate; the primary Nookal cost driver.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+  - location
+- name: sms_messages
+  description: SMS reminders and two-way messages, metered per message on top of the seat fee.
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+  - location
+- name: medicare_claims
+  description: Medicare / bulk-billing claims submitted, metered per successful claim.
+  unit: claims
+  aggregation: sum
+  dimensions:
+  - account
+  - location
+- name: addons
+  description: Optional add-ons (AI + Voice, Patient Portal, SSO, Secure Messaging) billed per licence, location, or user.
+  unit: licences
+  aggregation: sum
+  dimensions:
+  - account
+  - addon
+principles:
+- name: Visibility
+  description: Track active practitioner seats per plan and location, plus usage-metered SMS and Medicare lines, to see the full monthly Nookal cost.
+- name: Allocation
+  description: Map seats, add-ons, and per-location usage to clinics or cost centers; the API's cost is the Professional-or-above seat it rides on.
+- name: Optimization
+  description: Right-size the plan tier to the features actually used, deactivate unused practitioner seats promptly, and batch SMS/Medicare-triggering automation to control the metered lines your integration drives.
+- name: Accountability
+  description: Assign an owner per clinic account to review the monthly seat count, add-ons, and usage-metered charges against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
