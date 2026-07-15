@@ -148,6 +148,8 @@ apis:
     https://api.nookal.com/production/v2/verify, which returns a JSON status
     envelope and reports a missing or invalid api_key.
 common:
+- type: AgenticAccess
+  url: agentic-access/nookal-agentic-access.yml
 - type: DomainSecurity
   url: security/nookal-domain-security.yml
 - type: Authentication
