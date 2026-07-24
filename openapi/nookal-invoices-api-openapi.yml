@@ -1,0 +1,248 @@
+openapi: 3.0.3
+info:
+  title: Nookal Appointments Invoices API
+  description: 'REST API for Nookal, Australian-built practice management software for allied health clinics. The API exposes patients, cases, treatment notes, files, appointments, class bookings, availabilities, clinic reference data (locations, practitioners, appointment/class types, stock), and invoices.
+
+
+    Base URL: https://api.nookal.com/production/v2/. All requests are authenticated with an account-issued API key passed as the `api_key` parameter (query string for GET requests, form field for POST requests). Responses are JSON using a common envelope: `{"status":"success"|"failure","data":{...},"details":{...}}`. On failure, `details` carries `errorMessage`, `errorCode`, and an `alerts` array. Read endpoints are paginated via `page` and `page_length`, and the response `details` object reports `totalItems`, `currentItems`, `currentPage`, and `nextPage`.
+
+
+    Endpoint paths, methods, and parameters are grounded in Nookal''s public API reference (https://api.nookal.com/dev). The `verify`, `getLocations`, and `getPatients` surfaces were confirmed live against the production host; the `api_key` requirement is confirmed by live probes. Request and response body schemas below are MODELED from the documented object reference and the live JSON envelope, not copied from a machine-readable Nookal specification (Nookal does not publish one), so field-level shapes should be verified against a live account before production use.'
+  version: v2
+  contact:
+    name: Nookal
+    url: https://www.nookal.com
+  termsOfService: https://www.nookal.com/terms
+servers:
+- url: https://api.nookal.com/production/v2
+  description: Nookal production API (v2)
+security:
+- apiKeyQuery: []
+tags:
+- name: Invoices
+  description: Invoices and their items, payments, credits, discounts, and refunds.
+paths:
+  /getInvoices:
+    post:
+      operationId: getInvoices
+      tags:
+      - Invoices
+      summary: Get invoices
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              properties:
+                api_key:
+                  type: string
+                patient_id:
+                  type: string
+                last_modified:
+                  type: string
+                void:
+                  type: boolean
+                expanded:
+                  type: boolean
+      responses:
+        '200':
+          description: A status envelope whose data contains invoices.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getInvoice:
+    post:
+      operationId: getInvoice
+      tags:
+      - Invoices
+      summary: Get a single invoice
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              - invoice_id
+              properties:
+                api_key:
+                  type: string
+                invoice_id:
+                  type: string
+                void:
+                  type: boolean
+      responses:
+        '200':
+          description: A status envelope containing the requested invoice.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addInvoice:
+    post:
+      operationId: addInvoice
+      tags:
+      - Invoices
+      summary: Add an invoice
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              - location_id
+              - patient_id
+              - date
+              properties:
+                api_key:
+                  type: string
+                location_id:
+                  type: string
+                patient_id:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                invoice_notes:
+                  type: string
+                account_notes:
+                  type: string
+                items:
+                  type: string
+                  description: Serialized line items (see Nookal invoice object reference).
+                payments:
+                  type: string
+                  description: Serialized payments (see Nookal invoice object reference).
+                case_id:
+                  type: string
+                practitioner_id:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the created invoice.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addPaymentToInvoice:
+    post:
+      operationId: addPaymentToInvoice
+      tags:
+      - Invoices
+      summary: Add a payment to an invoice
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              - invoice_id
+              - method
+              - amount
+              - date
+              properties:
+                api_key:
+                  type: string
+                invoice_id:
+                  type: string
+                method:
+                  type: string
+                amount:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                payment_ref:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope confirming the payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getInvoicePayments:
+    post:
+      operationId: getInvoicePayments
+      tags:
+      - Invoices
+      summary: Get invoice payments
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              properties:
+                api_key:
+                  type: string
+                invoice_id:
+                  type: string
+                date_from:
+                  type: string
+                  format: date
+                date_to:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: A status envelope whose data contains invoice payments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+components:
+  schemas:
+    Details:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorCode:
+          type: string
+        alerts:
+          type: array
+          items:
+            type: string
+        totalItems:
+          type: integer
+        currentItems:
+          type: integer
+        currentPage:
+          type: integer
+        nextPage:
+          type: integer
+        pageLength:
+          type: integer
+    Envelope:
+      type: object
+      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          additionalProperties: true
+          description: Result payload on success (structure varies per endpoint).
+        details:
+          $ref: '#/components/schemas/Details'
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'Account-issued API key created in the Nookal application under Setup / Integrations, with a configurable access level. Passed as the `api_key` parameter - in the query string for GET requests and as a form field for POST requests. Confirmed live: omitting it returns a failure envelope with alert "Missing variable: api_key".'

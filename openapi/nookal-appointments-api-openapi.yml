@@ -1,0 +1,461 @@
+openapi: 3.0.3
+info:
+  title: Nookal Appointments API
+  description: 'REST API for Nookal, Australian-built practice management software for allied health clinics. The API exposes patients, cases, treatment notes, files, appointments, class bookings, availabilities, clinic reference data (locations, practitioners, appointment/class types, stock), and invoices.
+
+
+    Base URL: https://api.nookal.com/production/v2/. All requests are authenticated with an account-issued API key passed as the `api_key` parameter (query string for GET requests, form field for POST requests). Responses are JSON using a common envelope: `{"status":"success"|"failure","data":{...},"details":{...}}`. On failure, `details` carries `errorMessage`, `errorCode`, and an `alerts` array. Read endpoints are paginated via `page` and `page_length`, and the response `details` object reports `totalItems`, `currentItems`, `currentPage`, and `nextPage`.
+
+
+    Endpoint paths, methods, and parameters are grounded in Nookal''s public API reference (https://api.nookal.com/dev). The `verify`, `getLocations`, and `getPatients` surfaces were confirmed live against the production host; the `api_key` requirement is confirmed by live probes. Request and response body schemas below are MODELED from the documented object reference and the live JSON envelope, not copied from a machine-readable Nookal specification (Nookal does not publish one), so field-level shapes should be verified against a live account before production use.'
+  version: v2
+  contact:
+    name: Nookal
+    url: https://www.nookal.com
+  termsOfService: https://www.nookal.com/terms
+servers:
+- url: https://api.nookal.com/production/v2
+  description: Nookal production API (v2)
+security:
+- apiKeyQuery: []
+tags:
+- name: Appointments
+  description: Appointments, class bookings, availabilities, and the waiting list.
+paths:
+  /getAppointments:
+    get:
+      operationId: getAppointments
+      tags:
+      - Appointments
+      summary: Get appointments
+      parameters:
+      - name: location_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: date_from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: date_to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: patient_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: practitioner_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PageLength'
+      - $ref: '#/components/parameters/LastModified'
+      - name: appt_status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains appointments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getAppointmentAvailabilities:
+    get:
+      operationId: getAppointmentAvailabilities
+      tags:
+      - Appointments
+      summary: Get appointment availabilities
+      parameters:
+      - name: practitioner_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: date_from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: date_to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: location_id
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains available slots.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getClassAvailabilities:
+    get:
+      operationId: getClassAvailabilities
+      tags:
+      - Appointments
+      summary: Get class availabilities
+      parameters:
+      - name: practitioner_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: date_from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: date_to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: location_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: class_id
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains class availabilities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addAppointmentBooking:
+    post:
+      operationId: addAppointmentBooking
+      tags:
+      - Appointments
+      summary: Add an appointment booking
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              - location_id
+              - appointment_date
+              - start_time
+              - patient_id
+              - practitioner_id
+              properties:
+                api_key:
+                  type: string
+                location_id:
+                  type: string
+                appointment_date:
+                  type: string
+                  format: date
+                start_time:
+                  type: string
+                patient_id:
+                  type: string
+                practitioner_id:
+                  type: string
+                appointment_type_id:
+                  type: string
+                notes:
+                  type: string
+                allow_overlap_bookings:
+                  type: boolean
+      responses:
+        '200':
+          description: A status envelope containing the created booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /updateAppointmentBooking:
+    post:
+      operationId: updateAppointmentBooking
+      tags:
+      - Appointments
+      summary: Update an appointment booking
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              - appointment_id
+              properties:
+                api_key:
+                  type: string
+                appointment_id:
+                  type: string
+                location_id:
+                  type: string
+                appointment_date:
+                  type: string
+                  format: date
+                start_time:
+                  type: string
+                status:
+                  type: string
+                patient_id:
+                  type: string
+                practitioner_id:
+                  type: string
+                appointment_type_id:
+                  type: string
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the updated booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addClassBooking:
+    post:
+      operationId: addClassBooking
+      tags:
+      - Appointments
+      summary: Add a class booking
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              - location_id
+              - appointment_date
+              - start_time
+              - patient_id
+              - practitioner_id
+              properties:
+                api_key:
+                  type: string
+                location_id:
+                  type: string
+                appointment_date:
+                  type: string
+                  format: date
+                start_time:
+                  type: string
+                patient_id:
+                  type: string
+                practitioner_id:
+                  type: string
+                appointment_type_id:
+                  type: string
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the created class booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /cancelAppointment:
+    post:
+      operationId: cancelAppointment
+      tags:
+      - Appointments
+      summary: Cancel an appointment
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              - appointment_id
+              - patient_id
+              properties:
+                api_key:
+                  type: string
+                appointment_id:
+                  type: string
+                patient_id:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope confirming cancellation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /rebookAppointment:
+    post:
+      operationId: rebookAppointment
+      tags:
+      - Appointments
+      summary: Rebook an appointment
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_key
+              - appointment_id
+              - patient_id
+              properties:
+                api_key:
+                  type: string
+                appointment_id:
+                  type: string
+                patient_id:
+                  type: string
+                location_id:
+                  type: string
+                start_time:
+                  type: string
+                practitioner_id:
+                  type: string
+                appointment_date:
+                  type: string
+                  format: date
+                cancel_first:
+                  type: boolean
+      responses:
+        '200':
+          description: A status envelope containing the rebooked appointment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getClassParticipants:
+    get:
+      operationId: getClassParticipants
+      tags:
+      - Appointments
+      summary: Get class participants
+      parameters:
+      - name: appt_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains class participants.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getWaitingList:
+    get:
+      operationId: getWaitingList
+      tags:
+      - Appointments
+      summary: Get waiting list
+      parameters:
+      - name: lastmodified
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains the waiting list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+components:
+  schemas:
+    Envelope:
+      type: object
+      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          additionalProperties: true
+          description: Result payload on success (structure varies per endpoint).
+        details:
+          $ref: '#/components/schemas/Details'
+    Details:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorCode:
+          type: string
+        alerts:
+          type: array
+          items:
+            type: string
+        totalItems:
+          type: integer
+        currentItems:
+          type: integer
+        currentPage:
+          type: integer
+        nextPage:
+          type: integer
+        pageLength:
+          type: integer
+  parameters:
+    PageLength:
+      name: page_length
+      in: query
+      required: false
+      description: Number of items per page.
+      schema:
+        type: integer
+        default: 100
+    LastModified:
+      name: last_modified
+      in: query
+      required: false
+      description: Return only records modified after this timestamp (incremental sync).
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'Account-issued API key created in the Nookal application under Setup / Integrations, with a configurable access level. Passed as the `api_key` parameter - in the query string for GET requests and as a form field for POST requests. Confirmed live: omitting it returns a failure envelope with alert "Missing variable: api_key".'
