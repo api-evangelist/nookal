@@ -11,7 +11,20 @@ description: Nookal is Australian-built practice management software for allied 
   practitioners, locations, treatment notes, files, and invoices. The API is
   authenticated with an account-issued API key and returns JSON. API access is
   available on the paid Professional and Enterprise plans.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nookal.png
 tags:
 - Practice Management
 - Healthcare
@@ -27,126 +40,136 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: nookal:nookal-patients-api
-  name: Nookal Patients API
-  tags:
-  - Patients
-  - Cases
-  - Treatment Notes
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.nookal.com/dev/reference/patient
-  baseURL: https://api.nookal.com/production/v2
-  properties:
-  - url: https://api.nookal.com/developers
-    type: Documentation
-  - url: https://api.nookal.com/dev/reference/patient
-    type: APIReference
-  - url: openapi/nookal-openapi.yml
-    type: OpenAPI
-  - url: collections/nookal.postman_collection.json
-    type: PostmanCollection
-  - url: collections/nookal.opencollection.json
-    type: OpenCollection
-  description: Read and write patient records, cases, treatment notes, and patient
-    files. List and search patients, add and edit patients, manage cases, retrieve
-    and add treatment notes, upload and fetch patient files, and update Medicare / DVA
-    details. Confirmed live against https://api.nookal.com/production/v2/.
 - aid: nookal:nookal-appointments-api
   name: Nookal Appointments API
+  description: Appointments, class bookings, availabilities, and the waiting list.
+  humanURL: https://api.nookal.com/dev/reference/patient
+  baseURL: https://api.nookal.com/production/v2
   tags:
   - Appointments
-  - Bookings
-  - Scheduling
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.nookal.com/dev/reference/appointment
-  baseURL: https://api.nookal.com/production/v2
   properties:
-  - url: https://api.nookal.com/developers
-    type: Documentation
-  - url: https://api.nookal.com/dev/reference/appointment
-    type: APIReference
-  - url: openapi/nookal-openapi.yml
-    type: OpenAPI
-  - url: collections/nookal.postman_collection.json
-    type: PostmanCollection
-  - url: collections/nookal.opencollection.json
-    type: OpenCollection
-  description: Retrieve appointments and query appointment and class availabilities,
-    then create, update, cancel, and rebook appointment and class bookings. Also
-    read class participants, class and service redemptions, and the waiting list.
+  - type: OpenAPI
+    url: openapi/nookal-appointments-api-openapi.yml
+  - type: Documentation
+    url: https://api.nookal.com/developers
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/patient
+  - type: PostmanCollection
+    url: collections/nookal.postman_collection.json
+  - type: OpenCollection
+    url: collections/nookal.opencollection.json
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/appointment
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/location
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/invoices
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/verify
 - aid: nookal:nookal-clinic-api
   name: Nookal Clinic API
-  tags:
-  - Locations
-  - Practitioners
-  - Reference Data
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.nookal.com/dev/reference/location
+  description: Clinic reference data - locations, practitioners, and item/type lists.
+  humanURL: https://api.nookal.com/dev/reference/patient
   baseURL: https://api.nookal.com/production/v2
+  tags:
+  - Clinic
   properties:
-  - url: https://api.nookal.com/developers
-    type: Documentation
-  - url: https://api.nookal.com/dev/reference/location
-    type: APIReference
-  - url: openapi/nookal-openapi.yml
-    type: OpenAPI
-  - url: collections/nookal.postman_collection.json
-    type: PostmanCollection
-  - url: collections/nookal.opencollection.json
-    type: OpenCollection
-  description: Retrieve clinic reference data - locations and location logos,
-    practitioners and practitioner photos, appointment types, class types, and the
-    stock list - used to resolve the identifiers referenced across the Patients,
-    Appointments, and Invoices APIs. Confirmed live against
-    https://api.nookal.com/production/v2/.
+  - type: OpenAPI
+    url: openapi/nookal-clinic-api-openapi.yml
+  - type: Documentation
+    url: https://api.nookal.com/developers
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/patient
+  - type: PostmanCollection
+    url: collections/nookal.postman_collection.json
+  - type: OpenCollection
+    url: collections/nookal.opencollection.json
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/appointment
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/location
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/invoices
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/verify
 - aid: nookal:nookal-invoices-api
   name: Nookal Invoices API
+  description: Invoices and their items, payments, credits, discounts, and refunds.
+  humanURL: https://api.nookal.com/dev/reference/patient
+  baseURL: https://api.nookal.com/production/v2
   tags:
   - Invoices
-  - Payments
-  - Billing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.nookal.com/dev/reference/invoices
-  baseURL: https://api.nookal.com/production/v2
   properties:
-  - url: https://api.nookal.com/developers
-    type: Documentation
-  - url: https://api.nookal.com/dev/reference/invoices
-    type: APIReference
-  - url: openapi/nookal-openapi.yml
-    type: OpenAPI
-  - url: collections/nookal.postman_collection.json
-    type: PostmanCollection
-  - url: collections/nookal.opencollection.json
-    type: OpenCollection
-  description: Create and read invoices and their line items, payments, credits,
-    discounts, refunds, and adjustments. Add and delete invoice items and payments,
-    add account credit, and retrieve invoice entries and financial breakdowns for
-    billing and reconciliation workflows.
+  - type: OpenAPI
+    url: openapi/nookal-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://api.nookal.com/developers
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/patient
+  - type: PostmanCollection
+    url: collections/nookal.postman_collection.json
+  - type: OpenCollection
+    url: collections/nookal.opencollection.json
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/appointment
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/location
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/invoices
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/verify
+- aid: nookal:nookal-patients-api
+  name: Nookal Patients API
+  description: Patient records, cases, treatment notes, and patient files.
+  humanURL: https://api.nookal.com/dev/reference/patient
+  baseURL: https://api.nookal.com/production/v2
+  tags:
+  - Patients
+  properties:
+  - type: OpenAPI
+    url: openapi/nookal-patients-api-openapi.yml
+  - type: Documentation
+    url: https://api.nookal.com/developers
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/patient
+  - type: PostmanCollection
+    url: collections/nookal.postman_collection.json
+  - type: OpenCollection
+    url: collections/nookal.opencollection.json
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/appointment
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/location
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/invoices
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/verify
 - aid: nookal:nookal-verification-api
   name: Nookal Verification API
+  description: Verify that an API key is valid and connected to a Nookal account.
+  humanURL: https://api.nookal.com/dev/reference/patient
+  baseURL: https://api.nookal.com/production/v2
   tags:
   - Verification
-  - Authentication
-  - API Key
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.nookal.com/dev/reference/verify
-  baseURL: https://api.nookal.com/production/v2
   properties:
-  - url: https://api.nookal.com/developers
-    type: Documentation
-  - url: https://api.nookal.com/dev/reference/verify
-    type: APIReference
-  - url: openapi/nookal-openapi.yml
-    type: OpenAPI
-  - url: collections/nookal.postman_collection.json
-    type: PostmanCollection
-  - url: collections/nookal.opencollection.json
-    type: OpenCollection
-  description: Verify that an API key is valid and connected to a Nookal account
-    before making further calls. Confirmed live at
-    https://api.nookal.com/production/v2/verify, which returns a JSON status
-    envelope and reports a missing or invalid api_key.
+  - type: OpenAPI
+    url: openapi/nookal-verification-api-openapi.yml
+  - type: Documentation
+    url: https://api.nookal.com/developers
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/patient
+  - type: PostmanCollection
+    url: collections/nookal.postman_collection.json
+  - type: OpenCollection
+    url: collections/nookal.opencollection.json
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/appointment
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/location
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/invoices
+  - type: APIReference
+    url: https://api.nookal.com/dev/reference/verify
 common:
 - type: AgenticAccess
   url: agentic-access/nookal-agentic-access.yml
