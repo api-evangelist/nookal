@@ -1,0 +1,22 @@
+{
+  "provider": "nookal",
+  "sources": [
+    "nookal-appointments-api-openapi.yml",
+    "nookal-clinic-api-openapi.yml",
+    "nookal-invoices-api-openapi.yml",
+    "nookal-patients-api-openapi.yml",
+    "nookal-verification-api-openapi.yml"
+  ],
+  "outputs": [
+    "nookal-appointments-api-openapi.yml",
+    "nookal-clinic-api-openapi.yml",
+    "nookal-invoices-api-openapi.yml",
+    "nookal-patients-api-openapi.yml",
+    "nookal-verification-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

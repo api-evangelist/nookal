@@ -1,0 +1,1218 @@
+openapi: 3.0.3
+info:
+  title: Nookal API
+  description: >-
+    REST API for Nookal, Australian-built practice management software for allied
+    health clinics. The API exposes patients, cases, treatment notes, files,
+    appointments, class bookings, availabilities, clinic reference data
+    (locations, practitioners, appointment/class types, stock), and invoices.
+
+
+    Base URL: https://api.nookal.com/production/v2/. All requests are authenticated
+    with an account-issued API key passed as the `api_key` parameter (query string
+    for GET requests, form field for POST requests). Responses are JSON using a
+    common envelope: `{"status":"success"|"failure","data":{...},"details":{...}}`.
+    On failure, `details` carries `errorMessage`, `errorCode`, and an `alerts`
+    array. Read endpoints are paginated via `page` and `page_length`, and the
+    response `details` object reports `totalItems`, `currentItems`, `currentPage`,
+    and `nextPage`.
+
+
+    Endpoint paths, methods, and parameters are grounded in Nookal's public API
+    reference (https://api.nookal.com/dev). The `verify`, `getLocations`, and
+    `getPatients` surfaces were confirmed live against the production host; the
+    `api_key` requirement is confirmed by live probes. Request and response
+    body schemas below are MODELED from the documented object reference and the
+    live JSON envelope, not copied from a machine-readable Nookal specification
+    (Nookal does not publish one), so field-level shapes should be verified
+    against a live account before production use.
+  version: 'v2'
+  contact:
+    name: Nookal
+    url: https://www.nookal.com
+  termsOfService: https://www.nookal.com/terms
+servers:
+  - url: https://api.nookal.com/production/v2
+    description: Nookal production API (v2)
+security:
+  - apiKeyQuery: []
+tags:
+  - name: Verification
+    description: Verify that an API key is valid and connected to a Nookal account.
+  - name: Clinic
+    description: Clinic reference data - locations, practitioners, and item/type lists.
+  - name: Patients
+    description: Patient records, cases, treatment notes, and patient files.
+  - name: Appointments
+    description: Appointments, class bookings, availabilities, and the waiting list.
+  - name: Invoices
+    description: Invoices and their items, payments, credits, discounts, and refunds.
+paths:
+  /verify:
+    get:
+      operationId: verify
+      tags:
+        - Verification
+      summary: Verify API key
+      description: >-
+        Verifies that the supplied API key is valid and connected to a Nookal
+        account. Confirmed live: without an api_key the endpoint returns a
+        failure envelope with errorCode "L000_1" and alert "Missing variable:
+        api_key".
+      responses:
+        '200':
+          description: A status envelope indicating whether the key verified.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getLocations:
+    get:
+      operationId: getLocations
+      tags:
+        - Clinic
+      summary: Get locations
+      description: Retrieves the clinic locations for the account. Confirmed live.
+      parameters:
+        - $ref: '#/components/parameters/LastModified'
+      responses:
+        '200':
+          description: A status envelope whose data contains the list of locations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getLocationLogo:
+    get:
+      operationId: getLocationLogo
+      tags:
+        - Clinic
+      summary: Get location logo
+      parameters:
+        - name: location_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope containing the location logo reference.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getPractitioners:
+    get:
+      operationId: getPractitioners
+      tags:
+        - Clinic
+      summary: Get practitioners
+      parameters:
+        - $ref: '#/components/parameters/LastModified'
+        - name: include_inactive_practitioners
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A status envelope whose data contains the list of practitioners.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getPractitionerPhoto:
+    get:
+      operationId: getPractitionerPhoto
+      tags:
+        - Clinic
+      summary: Get practitioner photo
+      parameters:
+        - name: practitioner_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope containing the practitioner photo reference.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getAppointmentTypes:
+    get:
+      operationId: getAppointmentTypes
+      tags:
+        - Clinic
+      summary: Get appointment types
+      responses:
+        '200':
+          description: A status envelope whose data contains appointment types.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getClassTypes:
+    get:
+      operationId: getClassTypes
+      tags:
+        - Clinic
+      summary: Get class types
+      responses:
+        '200':
+          description: A status envelope whose data contains class types.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getStockList:
+    get:
+      operationId: getStockList
+      tags:
+        - Clinic
+      summary: Get stock list
+      responses:
+        '200':
+          description: A status envelope whose data contains the stock list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getPatients:
+    get:
+      operationId: getPatients
+      tags:
+        - Patients
+      summary: Get patients
+      description: >-
+        Lists patients in the account. Confirmed live (requires api_key).
+        Supports pagination and a last_modified incremental filter.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageLength'
+        - $ref: '#/components/parameters/LastModified'
+        - name: deceased
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A status envelope whose data contains a page of patients.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /searchPatients:
+    get:
+      operationId: searchPatients
+      tags:
+        - Patients
+      summary: Search patients
+      description: >-
+        Searches patients by one of several criteria - patient_id, online_code,
+        date_created, an email + name + date-of-birth combination, or a fuzzy
+        name search.
+      parameters:
+        - name: patient_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: online_code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: first_name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: last_name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: date_of_birth
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: fuzzy_search
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageLength'
+        - name: deceased
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A status envelope whose data contains matching patients.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getCases:
+    get:
+      operationId: getCases
+      tags:
+        - Patients
+      summary: Get cases for a patient
+      parameters:
+        - name: patient_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageLength'
+        - $ref: '#/components/parameters/LastModified'
+      responses:
+        '200':
+          description: A status envelope whose data contains the patient's cases.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getAllCases:
+    get:
+      operationId: getAllCases
+      tags:
+        - Patients
+      summary: Get all cases
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageLength'
+        - $ref: '#/components/parameters/LastModified'
+      responses:
+        '200':
+          description: A status envelope whose data contains cases across patients.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addPatient:
+    post:
+      operationId: addPatient
+      tags:
+        - Patients
+      summary: Add a patient
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddPatientRequest'
+      responses:
+        '200':
+          description: A status envelope containing the created patient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /editPatient:
+    post:
+      operationId: editPatient
+      tags:
+        - Patients
+      summary: Edit a patient
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - patient_id
+              properties:
+                api_key:
+                  type: string
+                patient_id:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                nickname:
+                  type: string
+                email:
+                  type: string
+                date_of_birth:
+                  type: string
+                  format: date
+                notes:
+                  type: string
+                status:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the updated patient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getTreatmentNotes:
+    get:
+      operationId: getTreatmentNotes
+      tags:
+        - Patients
+      summary: Get treatment notes for a patient
+      parameters:
+        - name: patient_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageLength'
+        - $ref: '#/components/parameters/LastModified'
+      responses:
+        '200':
+          description: A status envelope whose data contains treatment notes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getAllTreatmentNotes:
+    get:
+      operationId: getAllTreatmentNotes
+      tags:
+        - Patients
+      summary: Get all treatment notes
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageLength'
+        - $ref: '#/components/parameters/LastModified'
+        - name: practitioner_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains treatment notes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addTreatmentNote:
+    post:
+      operationId: addTreatmentNote
+      tags:
+        - Patients
+      summary: Add a treatment note
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - patient_id
+                - case_id
+                - practitioner_id
+                - date
+                - notes
+              properties:
+                api_key:
+                  type: string
+                patient_id:
+                  type: string
+                case_id:
+                  type: string
+                practitioner_id:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                notes:
+                  type: string
+                appt_id:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the created treatment note.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getPatientFiles:
+    get:
+      operationId: getPatientFiles
+      tags:
+        - Patients
+      summary: Get patient files
+      parameters:
+        - name: patient_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageLength'
+        - $ref: '#/components/parameters/LastModified'
+      responses:
+        '200':
+          description: A status envelope whose data contains patient files.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getFileUrl:
+    get:
+      operationId: getFileUrl
+      tags:
+        - Patients
+      summary: Get a file URL
+      parameters:
+        - name: patient_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: file_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope containing a downloadable file URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addCase:
+    post:
+      operationId: addCase
+      tags:
+        - Patients
+      summary: Add a case
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - patient_id
+              properties:
+                api_key:
+                  type: string
+                patient_id:
+                  type: string
+                title:
+                  type: string
+                start_date:
+                  type: string
+                  format: date
+                notes:
+                  type: string
+                primary_provider_id:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the created case.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /updatePatientMedicareDetails:
+    post:
+      operationId: updatePatientMedicareDetails
+      tags:
+        - Patients
+      summary: Update patient Medicare details
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - patient_id
+              properties:
+                api_key:
+                  type: string
+                patient_id:
+                  type: string
+                medicare_no:
+                  type: string
+                medicare_irn:
+                  type: string
+                expiry_date:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: A status envelope confirming the update.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getAppointments:
+    get:
+      operationId: getAppointments
+      tags:
+        - Appointments
+      summary: Get appointments
+      parameters:
+        - name: location_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: date_from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: date_to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: patient_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: practitioner_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageLength'
+        - $ref: '#/components/parameters/LastModified'
+        - name: appt_status
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains appointments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getAppointmentAvailabilities:
+    get:
+      operationId: getAppointmentAvailabilities
+      tags:
+        - Appointments
+      summary: Get appointment availabilities
+      parameters:
+        - name: practitioner_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: date_from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: date_to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: location_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains available slots.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getClassAvailabilities:
+    get:
+      operationId: getClassAvailabilities
+      tags:
+        - Appointments
+      summary: Get class availabilities
+      parameters:
+        - name: practitioner_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: date_from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: date_to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: location_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: class_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains class availabilities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addAppointmentBooking:
+    post:
+      operationId: addAppointmentBooking
+      tags:
+        - Appointments
+      summary: Add an appointment booking
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - location_id
+                - appointment_date
+                - start_time
+                - patient_id
+                - practitioner_id
+              properties:
+                api_key:
+                  type: string
+                location_id:
+                  type: string
+                appointment_date:
+                  type: string
+                  format: date
+                start_time:
+                  type: string
+                patient_id:
+                  type: string
+                practitioner_id:
+                  type: string
+                appointment_type_id:
+                  type: string
+                notes:
+                  type: string
+                allow_overlap_bookings:
+                  type: boolean
+      responses:
+        '200':
+          description: A status envelope containing the created booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /updateAppointmentBooking:
+    post:
+      operationId: updateAppointmentBooking
+      tags:
+        - Appointments
+      summary: Update an appointment booking
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - appointment_id
+              properties:
+                api_key:
+                  type: string
+                appointment_id:
+                  type: string
+                location_id:
+                  type: string
+                appointment_date:
+                  type: string
+                  format: date
+                start_time:
+                  type: string
+                status:
+                  type: string
+                patient_id:
+                  type: string
+                practitioner_id:
+                  type: string
+                appointment_type_id:
+                  type: string
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the updated booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addClassBooking:
+    post:
+      operationId: addClassBooking
+      tags:
+        - Appointments
+      summary: Add a class booking
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - location_id
+                - appointment_date
+                - start_time
+                - patient_id
+                - practitioner_id
+              properties:
+                api_key:
+                  type: string
+                location_id:
+                  type: string
+                appointment_date:
+                  type: string
+                  format: date
+                start_time:
+                  type: string
+                patient_id:
+                  type: string
+                practitioner_id:
+                  type: string
+                appointment_type_id:
+                  type: string
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the created class booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /cancelAppointment:
+    post:
+      operationId: cancelAppointment
+      tags:
+        - Appointments
+      summary: Cancel an appointment
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - appointment_id
+                - patient_id
+              properties:
+                api_key:
+                  type: string
+                appointment_id:
+                  type: string
+                patient_id:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope confirming cancellation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /rebookAppointment:
+    post:
+      operationId: rebookAppointment
+      tags:
+        - Appointments
+      summary: Rebook an appointment
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - appointment_id
+                - patient_id
+              properties:
+                api_key:
+                  type: string
+                appointment_id:
+                  type: string
+                patient_id:
+                  type: string
+                location_id:
+                  type: string
+                start_time:
+                  type: string
+                practitioner_id:
+                  type: string
+                appointment_date:
+                  type: string
+                  format: date
+                cancel_first:
+                  type: boolean
+      responses:
+        '200':
+          description: A status envelope containing the rebooked appointment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getClassParticipants:
+    get:
+      operationId: getClassParticipants
+      tags:
+        - Appointments
+      summary: Get class participants
+      parameters:
+        - name: appt_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains class participants.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getWaitingList:
+    get:
+      operationId: getWaitingList
+      tags:
+        - Appointments
+      summary: Get waiting list
+      parameters:
+        - name: lastmodified
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A status envelope whose data contains the waiting list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getInvoices:
+    post:
+      operationId: getInvoices
+      tags:
+        - Invoices
+      summary: Get invoices
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+              properties:
+                api_key:
+                  type: string
+                patient_id:
+                  type: string
+                last_modified:
+                  type: string
+                void:
+                  type: boolean
+                expanded:
+                  type: boolean
+      responses:
+        '200':
+          description: A status envelope whose data contains invoices.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getInvoice:
+    post:
+      operationId: getInvoice
+      tags:
+        - Invoices
+      summary: Get a single invoice
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - invoice_id
+              properties:
+                api_key:
+                  type: string
+                invoice_id:
+                  type: string
+                void:
+                  type: boolean
+      responses:
+        '200':
+          description: A status envelope containing the requested invoice.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addInvoice:
+    post:
+      operationId: addInvoice
+      tags:
+        - Invoices
+      summary: Add an invoice
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - location_id
+                - patient_id
+                - date
+              properties:
+                api_key:
+                  type: string
+                location_id:
+                  type: string
+                patient_id:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                invoice_notes:
+                  type: string
+                account_notes:
+                  type: string
+                items:
+                  type: string
+                  description: Serialized line items (see Nookal invoice object reference).
+                payments:
+                  type: string
+                  description: Serialized payments (see Nookal invoice object reference).
+                case_id:
+                  type: string
+                practitioner_id:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope containing the created invoice.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /addPaymentToInvoice:
+    post:
+      operationId: addPaymentToInvoice
+      tags:
+        - Invoices
+      summary: Add a payment to an invoice
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+                - invoice_id
+                - method
+                - amount
+                - date
+              properties:
+                api_key:
+                  type: string
+                invoice_id:
+                  type: string
+                method:
+                  type: string
+                amount:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                payment_ref:
+                  type: string
+      responses:
+        '200':
+          description: A status envelope confirming the payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+  /getInvoicePayments:
+    post:
+      operationId: getInvoicePayments
+      tags:
+        - Invoices
+      summary: Get invoice payments
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - api_key
+              properties:
+                api_key:
+                  type: string
+                invoice_id:
+                  type: string
+                date_from:
+                  type: string
+                  format: date
+                date_to:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: A status envelope whose data contains invoice payments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+components:
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: >-
+        Account-issued API key created in the Nookal application under Setup /
+        Integrations, with a configurable access level. Passed as the `api_key`
+        parameter - in the query string for GET requests and as a form field for
+        POST requests. Confirmed live: omitting it returns a failure envelope
+        with alert "Missing variable: api_key".
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        default: 1
+    PageLength:
+      name: page_length
+      in: query
+      required: false
+      description: Number of items per page.
+      schema:
+        type: integer
+        default: 100
+    LastModified:
+      name: last_modified
+      in: query
+      required: false
+      description: Return only records modified after this timestamp (incremental sync).
+      schema:
+        type: string
+  schemas:
+    Envelope:
+      type: object
+      description: >-
+        Standard Nookal JSON response envelope. On success, status is "success"
+        and data carries the results object; on failure, status is "failure" and
+        details carries errorMessage, errorCode, and alerts. Shape confirmed live
+        against the verify and getLocations endpoints.
+      properties:
+        status:
+          type: string
+          enum:
+            - success
+            - failure
+        data:
+          type: object
+          additionalProperties: true
+          description: Result payload on success (structure varies per endpoint).
+        details:
+          $ref: '#/components/schemas/Details'
+    Details:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorCode:
+          type: string
+        alerts:
+          type: array
+          items:
+            type: string
+        totalItems:
+          type: integer
+        currentItems:
+          type: integer
+        currentPage:
+          type: integer
+        nextPage:
+          type: integer
+        pageLength:
+          type: integer
+    AddPatientRequest:
+      type: object
+      required:
+        - api_key
+        - first_name
+        - last_name
+        - date_of_birth
+      properties:
+        api_key:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        email:
+          type: string
+        client_notes:
+          type: string
+        alert_notes:
+          type: string
