@@ -1,0 +1,829 @@
+{
+  "item": [
+    {
+      "id": "434a9b9a-ecf7-4658-9780-086e6333a3f1",
+      "name": "Invoices",
+      "description": {
+        "content": "Invoices and their items, payments, credits, discounts, and refunds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f725c4bb-f23a-4cf8-b2cb-5dbef5d48e9f",
+          "name": "Get invoices",
+          "request": {
+            "name": "Get invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "getInvoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "void",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expanded",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "810ecc00-dfb9-4e48-9918-51239a872561",
+              "name": "A status envelope whose data contains invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getInvoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "void",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "expanded",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": 4121\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 139,\n    \"currentItems\": 8789,\n    \"currentPage\": 7261,\n    \"nextPage\": 8156,\n    \"pageLength\": 8373\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ded8573f-6eab-41af-a2f6-70f58cbf61a9",
+          "name": "Get a single invoice",
+          "request": {
+            "name": "Get a single invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "getInvoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "invoice_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "void",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9d2a6453-1fbc-449b-86fd-e9f79f7978ea",
+              "name": "A status envelope containing the requested invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "invoice_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "void",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 6336.3993276588335,\n    \"key_1\": 1332.7769801883849\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 8442,\n    \"currentItems\": 7449,\n    \"currentPage\": 2237,\n    \"nextPage\": 7638,\n    \"pageLength\": 9766\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "681c90a1-173c-4777-a4f8-544f35fa9c58",
+          "name": "Add an invoice",
+          "request": {
+            "name": "Add an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "addInvoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "invoice_notes",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_notes",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "items",
+                  "value": "<string>",
+                  "description": "Serialized line items (see Nookal invoice object reference)."
+                },
+                {
+                  "disabled": false,
+                  "key": "payments",
+                  "value": "<string>",
+                  "description": "Serialized payments (see Nookal invoice object reference)."
+                },
+                {
+                  "disabled": false,
+                  "key": "case_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fe9e2884-0d07-4e12-a0de-466a74b5f1bf",
+              "name": "A status envelope containing the created invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "invoice_notes",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "account_notes",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Serialized line items (see Nookal invoice object reference).",
+                        "type": "text/plain"
+                      },
+                      "key": "items",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Serialized payments (see Nookal invoice object reference).",
+                        "type": "text/plain"
+                      },
+                      "key": "payments",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "case_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 6336.3993276588335,\n    \"key_1\": 1332.7769801883849\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 8442,\n    \"currentItems\": 7449,\n    \"currentPage\": 2237,\n    \"nextPage\": 7638,\n    \"pageLength\": 9766\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9e2504b-395d-42b4-9bdb-d929d3c8ad46",
+          "name": "Add a payment to an invoice",
+          "request": {
+            "name": "Add a payment to an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "addPaymentToInvoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "invoice_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_ref",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bcbcfda3-1d81-425a-8aaa-25d9e8ab0ba8",
+              "name": "A status envelope confirming the payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addPaymentToInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "invoice_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "payment_ref",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 6336.3993276588335,\n    \"key_1\": 1332.7769801883849\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 8442,\n    \"currentItems\": 7449,\n    \"currentPage\": 2237,\n    \"nextPage\": 7638,\n    \"pageLength\": 9766\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e744b2b-562a-4525-b9d0-029096dfb4e5",
+          "name": "Get invoice payments",
+          "request": {
+            "name": "Get invoice payments",
+            "description": {},
+            "url": {
+              "path": [
+                "getInvoicePayments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "invoice_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<date>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e91e5792-320d-4dbe-8edd-d8d3c13b1ad0",
+              "name": "A status envelope whose data contains invoice payments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getInvoicePayments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "invoice_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "date_from",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "date_to",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 6336.3993276588335,\n    \"key_1\": 1332.7769801883849\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 8442,\n    \"currentItems\": 7449,\n    \"currentPage\": 2237,\n    \"nextPage\": 7638,\n    \"pageLength\": 9766\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nookal.com/production/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b8d85c9f-0d51-4898-9f7e-9e95cfd484e0",
+    "name": "Nookal Appointments Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Nookal, Australian-built practice management software for allied health clinics. The API exposes patients, cases, treatment notes, files, appointments, class bookings, availabilities, clinic reference data (locations, practitioners, appointment/class types, stock), and invoices.\n\nBase URL: https://api.nookal.com/production/v2/. All requests are authenticated with an account-issued API key passed as the `api_key` parameter (query string for GET requests, form field for POST requests). Responses are JSON using a common envelope: `{\"status\":\"success\"|\"failure\",\"data\":{...},\"details\":{...}}`. On failure, `details` carries `errorMessage`, `errorCode`, and an `alerts` array. Read endpoints are paginated via `page` and `page_length`, and the response `details` object reports `totalItems`, `currentItems`, `currentPage`, and `nextPage`.\n\nEndpoint paths, methods, and parameters are grounded in Nookal's public API reference (https://api.nookal.com/dev). The `verify`, `getLocations`, and `getPatients` surfaces were confirmed live against the production host; the `api_key` requirement is confirmed by live probes. Request and response body schemas below are MODELED from the documented object reference and the live JSON envelope, not copied from a machine-readable Nookal specification (Nookal does not publish one), so field-level shapes should be verified against a live account before production use.\n\nContact Support:\n Name: Nookal",
+      "type": "text/plain"
+    }
+  }
+}

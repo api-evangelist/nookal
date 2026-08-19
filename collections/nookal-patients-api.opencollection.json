@@ -1,0 +1,512 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nookal Appointments Patients API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Patients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get patients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getPatients",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "page_length",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              },
+              {
+                "name": "deceased",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists patients in the account. Confirmed live (requires api_key). Supports pagination and a last_modified incremental filter."
+        },
+        {
+          "info": {
+            "name": "Search patients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/searchPatients",
+            "params": [
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "online_code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_of_birth",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fuzzy_search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "page_length",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "deceased",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches patients by one of several criteria - patient_id, online_code, date_created, an email + name + date-of-birth combination, or a fuzzy name search."
+        },
+        {
+          "info": {
+            "name": "Get cases for a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getCases",
+            "params": [
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "page_length",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              }
+            ]
+          },
+          "docs": "Get cases for a patient"
+        },
+        {
+          "info": {
+            "name": "Get all cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getAllCases",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "page_length",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              }
+            ]
+          },
+          "docs": "Get all cases"
+        },
+        {
+          "info": {
+            "name": "Add a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addPatient",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Add a patient"
+        },
+        {
+          "info": {
+            "name": "Edit a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/editPatient",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "first_name",
+                  "value": ""
+                },
+                {
+                  "name": "last_name",
+                  "value": ""
+                },
+                {
+                  "name": "nickname",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "date_of_birth",
+                  "value": ""
+                },
+                {
+                  "name": "notes",
+                  "value": ""
+                },
+                {
+                  "name": "status",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Edit a patient"
+        },
+        {
+          "info": {
+            "name": "Get treatment notes for a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getTreatmentNotes",
+            "params": [
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "page_length",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              }
+            ]
+          },
+          "docs": "Get treatment notes for a patient"
+        },
+        {
+          "info": {
+            "name": "Get all treatment notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getAllTreatmentNotes",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "page_length",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              },
+              {
+                "name": "practitioner_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all treatment notes"
+        },
+        {
+          "info": {
+            "name": "Add a treatment note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addTreatmentNote",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "case_id",
+                  "value": ""
+                },
+                {
+                  "name": "practitioner_id",
+                  "value": ""
+                },
+                {
+                  "name": "date",
+                  "value": ""
+                },
+                {
+                  "name": "notes",
+                  "value": ""
+                },
+                {
+                  "name": "appt_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add a treatment note"
+        },
+        {
+          "info": {
+            "name": "Get patient files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getPatientFiles",
+            "params": [
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "page_length",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              }
+            ]
+          },
+          "docs": "Get patient files"
+        },
+        {
+          "info": {
+            "name": "Get a file URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getFileUrl",
+            "params": [
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a file URL"
+        },
+        {
+          "info": {
+            "name": "Add a case",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addCase",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "title",
+                  "value": ""
+                },
+                {
+                  "name": "start_date",
+                  "value": ""
+                },
+                {
+                  "name": "notes",
+                  "value": ""
+                },
+                {
+                  "name": "primary_provider_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add a case"
+        },
+        {
+          "info": {
+            "name": "Update patient Medicare details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/updatePatientMedicareDetails",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "medicare_no",
+                  "value": ""
+                },
+                {
+                  "name": "medicare_irn",
+                  "value": ""
+                },
+                {
+                  "name": "expiry_date",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update patient Medicare details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

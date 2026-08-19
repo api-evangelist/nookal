@@ -1,0 +1,1503 @@
+{
+  "item": [
+    {
+      "id": "1e7ccd11-de9b-4740-baf7-9fa980e4c5fa",
+      "name": "Appointments",
+      "description": {
+        "content": "Appointments, class bookings, availabilities, and the waiting list.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2193be98-6815-4ee7-8ceb-751e540039a5",
+          "name": "Get appointments",
+          "request": {
+            "name": "Get appointments",
+            "description": {},
+            "url": {
+              "path": [
+                "getAppointments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_length",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                },
+                {
+                  "disabled": false,
+                  "key": "appt_status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8f6f240-6545-4108-be3c-717ff17460c0",
+              "name": "A status envelope whose data contains appointments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAppointments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appt_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": 1894,\n    \"key_2\": true\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 2061,\n    \"currentItems\": 8443,\n    \"currentPage\": 8082,\n    \"nextPage\": 3649,\n    \"pageLength\": 5138\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c708d723-bbdd-45b2-92d2-f5361f568087",
+          "name": "Get appointment availabilities",
+          "request": {
+            "name": "Get appointment availabilities",
+            "description": {},
+            "url": {
+              "path": [
+                "getAppointmentAvailabilities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69236870-8e9d-45a4-a791-01b935afacde",
+              "name": "A status envelope whose data contains available slots.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAppointmentAvailabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26cc82e4-dd8a-41b0-ad68-3f1807076bee",
+          "name": "Get class availabilities",
+          "request": {
+            "name": "Get class availabilities",
+            "description": {},
+            "url": {
+              "path": [
+                "getClassAvailabilities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "class_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76a3d772-3c7d-44fa-a082-5100454272f9",
+              "name": "A status envelope whose data contains class availabilities.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getClassAvailabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "349c6767-0ce8-4890-8303-129c25f02cfa",
+          "name": "Add an appointment booking",
+          "request": {
+            "name": "Add an appointment booking",
+            "description": {},
+            "url": {
+              "path": [
+                "addAppointmentBooking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_type_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "notes",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_overlap_bookings",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ecb84c67-ef57-462d-a0dc-5528a743bf02",
+              "name": "A status envelope containing the created booking.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addAppointmentBooking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "appointment_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "appointment_type_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "notes",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "allow_overlap_bookings",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4bfd505-acd9-4443-8995-ef381b085e14",
+          "name": "Update an appointment booking",
+          "request": {
+            "name": "Update an appointment booking",
+            "description": {},
+            "url": {
+              "path": [
+                "updateAppointmentBooking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_type_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "notes",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a4ea047b-66df-4b15-a200-b48664290f62",
+              "name": "A status envelope containing the updated booking.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "updateAppointmentBooking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "appointment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "appointment_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "appointment_type_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "notes",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee76ef0b-2de4-4aed-a181-4c890eb7f372",
+          "name": "Add a class booking",
+          "request": {
+            "name": "Add a class booking",
+            "description": {},
+            "url": {
+              "path": [
+                "addClassBooking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_type_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "notes",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "590de367-4062-41e0-bbb0-13b42436fc73",
+              "name": "A status envelope containing the created class booking.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addClassBooking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "appointment_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "appointment_type_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "notes",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abc86dd6-b2bd-4d93-a66a-eafdfcfa36ef",
+          "name": "Cancel an appointment",
+          "request": {
+            "name": "Cancel an appointment",
+            "description": {},
+            "url": {
+              "path": [
+                "cancelAppointment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a0cf7bc-94e2-429f-b71b-665237380470",
+              "name": "A status envelope confirming cancellation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelAppointment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "appointment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "242a8b6b-6087-4666-9a11-8937ef17f378",
+          "name": "Rebook an appointment",
+          "request": {
+            "name": "Rebook an appointment",
+            "description": {},
+            "url": {
+              "path": [
+                "rebookAppointment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cancel_first",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f096687c-ab91-4718-a6d9-30b08f824589",
+              "name": "A status envelope containing the rebooked appointment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rebookAppointment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "appointment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "appointment_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cancel_first",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ebca5f2-f60b-4c93-a2b1-b83877ed12e5",
+          "name": "Get class participants",
+          "request": {
+            "name": "Get class participants",
+            "description": {},
+            "url": {
+              "path": [
+                "getClassParticipants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "appt_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28926d46-5dc5-4275-9173-eaa4ad3d5a41",
+              "name": "A status envelope whose data contains class participants.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getClassParticipants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appt_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a54b4b02-33ef-4cdf-b66b-f95620874728",
+          "name": "Get waiting list",
+          "request": {
+            "name": "Get waiting list",
+            "description": {},
+            "url": {
+              "path": [
+                "getWaitingList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lastmodified",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b550d9f-8f83-47b2-80f6-98c413d22b16",
+              "name": "A status envelope whose data contains the waiting list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getWaitingList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lastmodified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2431.2365466713213\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 6236,\n    \"currentItems\": 8432,\n    \"currentPage\": 6679,\n    \"nextPage\": 3796,\n    \"pageLength\": 8637\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nookal.com/production/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c62a022d-4d5e-482d-86d9-562beb529665",
+    "name": "Nookal Appointments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Nookal, Australian-built practice management software for allied health clinics. The API exposes patients, cases, treatment notes, files, appointments, class bookings, availabilities, clinic reference data (locations, practitioners, appointment/class types, stock), and invoices.\n\nBase URL: https://api.nookal.com/production/v2/. All requests are authenticated with an account-issued API key passed as the `api_key` parameter (query string for GET requests, form field for POST requests). Responses are JSON using a common envelope: `{\"status\":\"success\"|\"failure\",\"data\":{...},\"details\":{...}}`. On failure, `details` carries `errorMessage`, `errorCode`, and an `alerts` array. Read endpoints are paginated via `page` and `page_length`, and the response `details` object reports `totalItems`, `currentItems`, `currentPage`, and `nextPage`.\n\nEndpoint paths, methods, and parameters are grounded in Nookal's public API reference (https://api.nookal.com/dev). The `verify`, `getLocations`, and `getPatients` surfaces were confirmed live against the production host; the `api_key` requirement is confirmed by live probes. Request and response body schemas below are MODELED from the documented object reference and the live JSON envelope, not copied from a machine-readable Nookal specification (Nookal does not publish one), so field-level shapes should be verified against a live account before production use.\n\nContact Support:\n Name: Nookal",
+      "type": "text/plain"
+    }
+  }
+}

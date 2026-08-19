@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nookal Appointments Verification API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Verify API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/verify"
+          },
+          "docs": "Verifies that the supplied API key is valid and connected to a Nookal account. Confirmed live: without an api_key the endpoint returns a failure envelope with errorCode \"L000_1\" and alert \"Missing variable: api_key\"."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

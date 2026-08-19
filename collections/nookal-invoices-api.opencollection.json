@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nookal Appointments Invoices API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/getInvoices",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "last_modified",
+                  "value": ""
+                },
+                {
+                  "name": "void",
+                  "value": ""
+                },
+                {
+                  "name": "expanded",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Get invoices"
+        },
+        {
+          "info": {
+            "name": "Get a single invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/getInvoice",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "invoice_id",
+                  "value": ""
+                },
+                {
+                  "name": "void",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Get a single invoice"
+        },
+        {
+          "info": {
+            "name": "Add an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addInvoice",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "location_id",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "date",
+                  "value": ""
+                },
+                {
+                  "name": "invoice_notes",
+                  "value": ""
+                },
+                {
+                  "name": "account_notes",
+                  "value": ""
+                },
+                {
+                  "name": "items",
+                  "value": ""
+                },
+                {
+                  "name": "payments",
+                  "value": ""
+                },
+                {
+                  "name": "case_id",
+                  "value": ""
+                },
+                {
+                  "name": "practitioner_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add an invoice"
+        },
+        {
+          "info": {
+            "name": "Add a payment to an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addPaymentToInvoice",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "invoice_id",
+                  "value": ""
+                },
+                {
+                  "name": "method",
+                  "value": ""
+                },
+                {
+                  "name": "amount",
+                  "value": ""
+                },
+                {
+                  "name": "date",
+                  "value": ""
+                },
+                {
+                  "name": "payment_ref",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add a payment to an invoice"
+        },
+        {
+          "info": {
+            "name": "Get invoice payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/getInvoicePayments",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "invoice_id",
+                  "value": ""
+                },
+                {
+                  "name": "date_from",
+                  "value": ""
+                },
+                {
+                  "name": "date_to",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Get invoice payments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

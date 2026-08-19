@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nookal Appointments Clinic API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clinic",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getLocations",
+            "params": [
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              }
+            ]
+          },
+          "docs": "Retrieves the clinic locations for the account. Confirmed live."
+        },
+        {
+          "info": {
+            "name": "Get location logo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getLocationLogo",
+            "params": [
+              {
+                "name": "location_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get location logo"
+        },
+        {
+          "info": {
+            "name": "Get practitioners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getPractitioners",
+            "params": [
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              },
+              {
+                "name": "include_inactive_practitioners",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get practitioners"
+        },
+        {
+          "info": {
+            "name": "Get practitioner photo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getPractitionerPhoto",
+            "params": [
+              {
+                "name": "practitioner_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get practitioner photo"
+        },
+        {
+          "info": {
+            "name": "Get appointment types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getAppointmentTypes"
+          },
+          "docs": "Get appointment types"
+        },
+        {
+          "info": {
+            "name": "Get class types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getClassTypes"
+          },
+          "docs": "Get class types"
+        },
+        {
+          "info": {
+            "name": "Get stock list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getStockList"
+          },
+          "docs": "Get stock list"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

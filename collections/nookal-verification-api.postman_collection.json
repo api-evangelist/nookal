@@ -1,0 +1,124 @@
+{
+  "item": [
+    {
+      "id": "f62e49e0-dee2-4841-a52c-17bf81c35657",
+      "name": "Verification",
+      "description": {
+        "content": "Verify that an API key is valid and connected to a Nookal account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29b45773-6e30-44e4-a299-df394d928399",
+          "name": "Verify API key",
+          "request": {
+            "name": "Verify API key",
+            "description": {
+              "content": "Verifies that the supplied API key is valid and connected to a Nookal account. Confirmed live: without an api_key the endpoint returns a failure envelope with errorCode \"L000_1\" and alert \"Missing variable: api_key\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16b4a4e5-ed50-45b3-8667-c21a8a30300e",
+              "name": "A status envelope indicating whether the key verified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": {\n    \"key_0\": false\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 765,\n    \"currentItems\": 2499,\n    \"currentPage\": 7445,\n    \"nextPage\": 9380,\n    \"pageLength\": 1556\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nookal.com/production/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c08d741d-b2be-40c1-95ec-49384c8bd801",
+    "name": "Nookal Appointments Verification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Nookal, Australian-built practice management software for allied health clinics. The API exposes patients, cases, treatment notes, files, appointments, class bookings, availabilities, clinic reference data (locations, practitioners, appointment/class types, stock), and invoices.\n\nBase URL: https://api.nookal.com/production/v2/. All requests are authenticated with an account-issued API key passed as the `api_key` parameter (query string for GET requests, form field for POST requests). Responses are JSON using a common envelope: `{\"status\":\"success\"|\"failure\",\"data\":{...},\"details\":{...}}`. On failure, `details` carries `errorMessage`, `errorCode`, and an `alerts` array. Read endpoints are paginated via `page` and `page_length`, and the response `details` object reports `totalItems`, `currentItems`, `currentPage`, and `nextPage`.\n\nEndpoint paths, methods, and parameters are grounded in Nookal's public API reference (https://api.nookal.com/dev). The `verify`, `getLocations`, and `getPatients` surfaces were confirmed live against the production host; the `api_key` requirement is confirmed by live probes. Request and response body schemas below are MODELED from the documented object reference and the live JSON envelope, not copied from a machine-readable Nookal specification (Nookal does not publish one), so field-level shapes should be verified against a live account before production use.\n\nContact Support:\n Name: Nookal",
+      "type": "text/plain"
+    }
+  }
+}

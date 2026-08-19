@@ -1,0 +1,426 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nookal Appointments API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Appointments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get appointments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getAppointments",
+            "params": [
+              {
+                "name": "location_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "practitioner_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "page_length",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "last_modified",
+                "value": "",
+                "type": "query",
+                "description": "Return only records modified after this timestamp (incremental sync)."
+              },
+              {
+                "name": "appt_status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get appointments"
+        },
+        {
+          "info": {
+            "name": "Get appointment availabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getAppointmentAvailabilities",
+            "params": [
+              {
+                "name": "practitioner_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get appointment availabilities"
+        },
+        {
+          "info": {
+            "name": "Get class availabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getClassAvailabilities",
+            "params": [
+              {
+                "name": "practitioner_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get class availabilities"
+        },
+        {
+          "info": {
+            "name": "Add an appointment booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addAppointmentBooking",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "location_id",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_date",
+                  "value": ""
+                },
+                {
+                  "name": "start_time",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "practitioner_id",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_type_id",
+                  "value": ""
+                },
+                {
+                  "name": "notes",
+                  "value": ""
+                },
+                {
+                  "name": "allow_overlap_bookings",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add an appointment booking"
+        },
+        {
+          "info": {
+            "name": "Update an appointment booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/updateAppointmentBooking",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_id",
+                  "value": ""
+                },
+                {
+                  "name": "location_id",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_date",
+                  "value": ""
+                },
+                {
+                  "name": "start_time",
+                  "value": ""
+                },
+                {
+                  "name": "status",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "practitioner_id",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_type_id",
+                  "value": ""
+                },
+                {
+                  "name": "notes",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an appointment booking"
+        },
+        {
+          "info": {
+            "name": "Add a class booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/addClassBooking",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "location_id",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_date",
+                  "value": ""
+                },
+                {
+                  "name": "start_time",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "practitioner_id",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_type_id",
+                  "value": ""
+                },
+                {
+                  "name": "notes",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add a class booking"
+        },
+        {
+          "info": {
+            "name": "Cancel an appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/cancelAppointment",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_id",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Cancel an appointment"
+        },
+        {
+          "info": {
+            "name": "Rebook an appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nookal.com/production/v2/rebookAppointment",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "api_key",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_id",
+                  "value": ""
+                },
+                {
+                  "name": "patient_id",
+                  "value": ""
+                },
+                {
+                  "name": "location_id",
+                  "value": ""
+                },
+                {
+                  "name": "start_time",
+                  "value": ""
+                },
+                {
+                  "name": "practitioner_id",
+                  "value": ""
+                },
+                {
+                  "name": "appointment_date",
+                  "value": ""
+                },
+                {
+                  "name": "cancel_first",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Rebook an appointment"
+        },
+        {
+          "info": {
+            "name": "Get class participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getClassParticipants",
+            "params": [
+              {
+                "name": "appt_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get class participants"
+        },
+        {
+          "info": {
+            "name": "Get waiting list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nookal.com/production/v2/getWaitingList",
+            "params": [
+              {
+                "name": "lastmodified",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get waiting list"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,609 @@
+{
+  "item": [
+    {
+      "id": "bee13b47-b169-4a3b-aed6-977d4e3ad3df",
+      "name": "Clinic",
+      "description": {
+        "content": "Clinic reference data - locations, practitioners, and item/type lists.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "553184e3-562c-4b88-8679-402aa484e228",
+          "name": "Get locations",
+          "request": {
+            "name": "Get locations",
+            "description": {
+              "content": "Retrieves the clinic locations for the account. Confirmed live.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getLocations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8849cb21-bb07-4b72-a9b6-78518a8c0be8",
+              "name": "A status envelope whose data contains the list of locations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getLocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\"\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 8551,\n    \"currentItems\": 1732,\n    \"currentPage\": 5764,\n    \"nextPage\": 4570,\n    \"pageLength\": 135\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c42c5f7d-8615-46a9-b67b-c6b1bf11cdd3",
+          "name": "Get location logo",
+          "request": {
+            "name": "Get location logo",
+            "description": {},
+            "url": {
+              "path": [
+                "getLocationLogo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c4a4db3-1358-4745-b9cf-6ba7b862b589",
+              "name": "A status envelope containing the location logo reference.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getLocationLogo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2475.8379984223457,\n    \"key_1\": 5746.923619843387\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 2136,\n    \"currentItems\": 3522,\n    \"currentPage\": 4250,\n    \"nextPage\": 471,\n    \"pageLength\": 8322\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35be93b8-c46b-4be6-8417-17eeb505178b",
+          "name": "Get practitioners",
+          "request": {
+            "name": "Get practitioners",
+            "description": {},
+            "url": {
+              "path": [
+                "getPractitioners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_inactive_practitioners",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7460bf72-c776-4e61-8553-cde64037997e",
+              "name": "A status envelope whose data contains the list of practitioners.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getPractitioners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_inactive_practitioners",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2475.8379984223457,\n    \"key_1\": 5746.923619843387\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 2136,\n    \"currentItems\": 3522,\n    \"currentPage\": 4250,\n    \"nextPage\": 471,\n    \"pageLength\": 8322\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12738e23-db96-4734-8cf4-c6349112ea3c",
+          "name": "Get practitioner photo",
+          "request": {
+            "name": "Get practitioner photo",
+            "description": {},
+            "url": {
+              "path": [
+                "getPractitionerPhoto"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6dd4a0da-43a2-42f9-9a1b-2fb04028ba75",
+              "name": "A status envelope containing the practitioner photo reference.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getPractitionerPhoto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2475.8379984223457,\n    \"key_1\": 5746.923619843387\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 2136,\n    \"currentItems\": 3522,\n    \"currentPage\": 4250,\n    \"nextPage\": 471,\n    \"pageLength\": 8322\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36decacc-6a11-4a49-8bc0-1a2b09584e0f",
+          "name": "Get appointment types",
+          "request": {
+            "name": "Get appointment types",
+            "description": {},
+            "url": {
+              "path": [
+                "getAppointmentTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d1abdf0-aeb5-4db8-b0b5-90b070fe44fb",
+              "name": "A status envelope whose data contains appointment types.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAppointmentTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2475.8379984223457,\n    \"key_1\": 5746.923619843387\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 2136,\n    \"currentItems\": 3522,\n    \"currentPage\": 4250,\n    \"nextPage\": 471,\n    \"pageLength\": 8322\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d43247ae-131a-423e-b52e-000c3969e525",
+          "name": "Get class types",
+          "request": {
+            "name": "Get class types",
+            "description": {},
+            "url": {
+              "path": [
+                "getClassTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d22621c-bf19-41d4-8a97-35ba950f913c",
+              "name": "A status envelope whose data contains class types.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getClassTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2475.8379984223457,\n    \"key_1\": 5746.923619843387\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 2136,\n    \"currentItems\": 3522,\n    \"currentPage\": 4250,\n    \"nextPage\": 471,\n    \"pageLength\": 8322\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e22498a-87dd-4799-80f9-ceb28f8cb426",
+          "name": "Get stock list",
+          "request": {
+            "name": "Get stock list",
+            "description": {},
+            "url": {
+              "path": [
+                "getStockList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ac2dfae-b0cd-47d6-9f0d-2f574e5285df",
+              "name": "A status envelope whose data contains the stock list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getStockList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 2475.8379984223457,\n    \"key_1\": 5746.923619843387\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 2136,\n    \"currentItems\": 3522,\n    \"currentPage\": 4250,\n    \"nextPage\": 471,\n    \"pageLength\": 8322\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nookal.com/production/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "52b16688-f527-4c27-b861-db07228fab3f",
+    "name": "Nookal Appointments Clinic API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Nookal, Australian-built practice management software for allied health clinics. The API exposes patients, cases, treatment notes, files, appointments, class bookings, availabilities, clinic reference data (locations, practitioners, appointment/class types, stock), and invoices.\n\nBase URL: https://api.nookal.com/production/v2/. All requests are authenticated with an account-issued API key passed as the `api_key` parameter (query string for GET requests, form field for POST requests). Responses are JSON using a common envelope: `{\"status\":\"success\"|\"failure\",\"data\":{...},\"details\":{...}}`. On failure, `details` carries `errorMessage`, `errorCode`, and an `alerts` array. Read endpoints are paginated via `page` and `page_length`, and the response `details` object reports `totalItems`, `currentItems`, `currentPage`, and `nextPage`.\n\nEndpoint paths, methods, and parameters are grounded in Nookal's public API reference (https://api.nookal.com/dev). The `verify`, `getLocations`, and `getPatients` surfaces were confirmed live against the production host; the `api_key` requirement is confirmed by live probes. Request and response body schemas below are MODELED from the documented object reference and the live JSON envelope, not copied from a machine-readable Nookal specification (Nookal does not publish one), so field-level shapes should be verified against a live account before production use.\n\nContact Support:\n Name: Nookal",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1824 @@
+{
+  "item": [
+    {
+      "id": "c03d31d2-04c4-4f06-a3a3-f2aedbfd81cb",
+      "name": "Patients",
+      "description": {
+        "content": "Patient records, cases, treatment notes, and patient files.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d47450a7-0702-4161-b93f-0f3af82f790b",
+          "name": "Get patients",
+          "request": {
+            "name": "Get patients",
+            "description": {
+              "content": "Lists patients in the account. Confirmed live (requires api_key). Supports pagination and a last_modified incremental filter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getPatients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_length",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                },
+                {
+                  "disabled": false,
+                  "key": "deceased",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f47344bb-dfe3-4d87-ac92-94f5654bac40",
+              "name": "A status envelope whose data contains a page of patients.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getPatients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deceased",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": 3038,\n    \"key_1\": 6387.22325623767,\n    \"key_2\": \"string\"\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 3865,\n    \"currentItems\": 5360,\n    \"currentPage\": 4317,\n    \"nextPage\": 6893,\n    \"pageLength\": 4360\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92b6c2df-cc27-450c-8e30-aa3fa40cf814",
+          "name": "Search patients",
+          "request": {
+            "name": "Search patients",
+            "description": {
+              "content": "Searches patients by one of several criteria - patient_id, online_code, date_created, an email + name + date-of-birth combination, or a fuzzy name search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "searchPatients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "online_code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_of_birth",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fuzzy_search",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_length",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "deceased",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d39a29a8-468c-4437-b587-094e077ef142",
+              "name": "A status envelope whose data contains matching patients.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "searchPatients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "online_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_of_birth",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fuzzy_search",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "deceased",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a6a287a-43cb-4e27-800b-c1e991261594",
+          "name": "Get cases for a patient",
+          "request": {
+            "name": "Get cases for a patient",
+            "description": {},
+            "url": {
+              "path": [
+                "getCases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_length",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cf1b6c7-26be-4c20-83cb-b723e2b88c6f",
+              "name": "A status envelope whose data contains the patient's cases.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "283fe144-092f-4e48-8512-dd3d506c63db",
+          "name": "Get all cases",
+          "request": {
+            "name": "Get all cases",
+            "description": {},
+            "url": {
+              "path": [
+                "getAllCases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_length",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9918671-b6af-4990-b8a2-87039255a466",
+              "name": "A status envelope whose data contains cases across patients.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAllCases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f0f2c83-6ebf-4a89-aef2-ce92fb85015a",
+          "name": "Add a patient",
+          "request": {
+            "name": "Add a patient",
+            "description": {},
+            "url": {
+              "path": [
+                "addPatient"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "date_of_birth",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_notes",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "alert_notes",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ccd97475-acdb-42e1-b30f-8fc62649a9c3",
+              "name": "A status envelope containing the created patient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addPatient"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date_of_birth",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_notes",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "alert_notes",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15e79504-6dc5-4d65-9a4c-4666412a5461",
+          "name": "Edit a patient",
+          "request": {
+            "name": "Edit a patient",
+            "description": {},
+            "url": {
+              "path": [
+                "editPatient"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "nickname",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_of_birth",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "notes",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ccc5a6d6-30e4-4b88-bbdb-82031f67e2be",
+              "name": "A status envelope containing the updated patient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "editPatient"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "nickname",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "date_of_birth",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "notes",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfa4ef08-6497-4962-ad13-db4365888aef",
+          "name": "Get treatment notes for a patient",
+          "request": {
+            "name": "Get treatment notes for a patient",
+            "description": {},
+            "url": {
+              "path": [
+                "getTreatmentNotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_length",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7585ea4-a1a6-4e54-b650-31cd91242ab4",
+              "name": "A status envelope whose data contains treatment notes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getTreatmentNotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "326f74fb-7cad-4d68-bee9-1b6beea32ce9",
+          "name": "Get all treatment notes",
+          "request": {
+            "name": "Get all treatment notes",
+            "description": {},
+            "url": {
+              "path": [
+                "getAllTreatmentNotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_length",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d99de71b-eeb5-4ea2-8c06-5285ad141e2f",
+              "name": "A status envelope whose data contains treatment notes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAllTreatmentNotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33fb9d0a-d827-416c-9916-1be208b76ee2",
+          "name": "Add a treatment note",
+          "request": {
+            "name": "Add a treatment note",
+            "description": {},
+            "url": {
+              "path": [
+                "addTreatmentNote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "case_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "notes",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "appt_id",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7f3f18e8-f694-4192-a30c-06ea7a40cc20",
+              "name": "A status envelope containing the created treatment note.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addTreatmentNote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "case_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "practitioner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "notes",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "appt_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ad8dd19-8ceb-48de-99cd-6ea71c0f77ea",
+          "name": "Get patient files",
+          "request": {
+            "name": "Get patient files",
+            "description": {},
+            "url": {
+              "path": [
+                "getPatientFiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_length",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified",
+                  "value": "<string>",
+                  "description": "Return only records modified after this timestamp (incremental sync)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "567c5e27-1cf7-48f8-8c23-e715454a1b79",
+              "name": "A status envelope whose data contains patient files.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getPatientFiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "last_modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea106d74-b9a8-44e6-b29d-472ed7dedef3",
+          "name": "Get a file URL",
+          "request": {
+            "name": "Get a file URL",
+            "description": {},
+            "url": {
+              "path": [
+                "getFileUrl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "file_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8f10874-449a-40c1-b318-1f74c2dbb271",
+              "name": "A status envelope containing a downloadable file URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getFileUrl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97b4410a-c98c-4550-8eae-ba69860e5dbd",
+          "name": "Add a case",
+          "request": {
+            "name": "Add a case",
+            "description": {},
+            "url": {
+              "path": [
+                "addCase"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "notes",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "primary_provider_id",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "afcdd41a-e553-49e6-b91a-0cc6902ce6d0",
+              "name": "A status envelope containing the created case.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addCase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "notes",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "primary_provider_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b93b352-6ab3-4151-918a-8e846ae6749d",
+          "name": "Update patient Medicare details",
+          "request": {
+            "name": "Update patient Medicare details",
+            "description": {},
+            "url": {
+              "path": [
+                "updatePatientMedicareDetails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "medicare_no",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "medicare_irn",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expiry_date",
+                  "value": "<date>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "491d8f0c-f0dc-4b1a-8e4c-7aabdd1605d0",
+              "name": "A status envelope confirming the update.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "updatePatientMedicareDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "patient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "medicare_no",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "medicare_irn",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "expiry_date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 2049.229937750997\n  },\n  \"details\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\",\n    \"alerts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"totalItems\": 1480,\n    \"currentItems\": 8564,\n    \"currentPage\": 3389,\n    \"nextPage\": 6889,\n    \"pageLength\": 283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nookal.com/production/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "314dacfc-c6a7-4522-a8c8-dd07b9c8699c",
+    "name": "Nookal Appointments Patients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Nookal, Australian-built practice management software for allied health clinics. The API exposes patients, cases, treatment notes, files, appointments, class bookings, availabilities, clinic reference data (locations, practitioners, appointment/class types, stock), and invoices.\n\nBase URL: https://api.nookal.com/production/v2/. All requests are authenticated with an account-issued API key passed as the `api_key` parameter (query string for GET requests, form field for POST requests). Responses are JSON using a common envelope: `{\"status\":\"success\"|\"failure\",\"data\":{...},\"details\":{...}}`. On failure, `details` carries `errorMessage`, `errorCode`, and an `alerts` array. Read endpoints are paginated via `page` and `page_length`, and the response `details` object reports `totalItems`, `currentItems`, `currentPage`, and `nextPage`.\n\nEndpoint paths, methods, and parameters are grounded in Nookal's public API reference (https://api.nookal.com/dev). The `verify`, `getLocations`, and `getPatients` surfaces were confirmed live against the production host; the `api_key` requirement is confirmed by live probes. Request and response body schemas below are MODELED from the documented object reference and the live JSON envelope, not copied from a machine-readable Nookal specification (Nookal does not publish one), so field-level shapes should be verified against a live account before production use.\n\nContact Support:\n Name: Nookal",
+      "type": "text/plain"
+    }
+  }
+}
