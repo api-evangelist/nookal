@@ -11,6 +11,18 @@ description: Nookal is Australian-built practice management software for allied 
   practitioners, locations, treatment notes, files, and invoices. The API is
   authenticated with an account-issued API key and returns JSON. API access is
   available on the paid Professional and Enterprise plans.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
