@@ -46,7 +46,7 @@ tags:
 - Scheduling
 - Patients
 - Clinics
-- Bookings
+- Booking
 - Physiotherapy
 - Software-as-a-Service
 tags_raw:
@@ -96,6 +96,8 @@ apis:
   humanURL: https://api.nookal.com/dev/reference/patient
   baseURL: https://api.nookal.com/production/v2
   tags:
+  - Clinics
+  tags_raw:
   - Clinic
   properties:
   - type: OpenAPI
