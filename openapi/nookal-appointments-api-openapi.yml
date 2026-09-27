@@ -386,43 +386,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Envelope'
 components:
-  schemas:
-    Details:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-        errorCode:
-          type: string
-        alerts:
-          type: array
-          items:
-            type: string
-        totalItems:
-          type: integer
-        currentItems:
-          type: integer
-        currentPage:
-          type: integer
-        nextPage:
-          type: integer
-        pageLength:
-          type: integer
-    Envelope:
-      type: object
-      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: object
-          additionalProperties: true
-          description: Result payload on success (structure varies per endpoint).
-        details:
-          $ref: '#/components/schemas/Details'
   parameters:
     LastModified:
       name: last_modified
@@ -447,6 +410,43 @@ components:
       schema:
         type: integer
         default: 1
+  schemas:
+    Envelope:
+      type: object
+      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          additionalProperties: true
+          description: Result payload on success (structure varies per endpoint).
+        details:
+          $ref: '#/components/schemas/Details'
+    Details:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorCode:
+          type: string
+        alerts:
+          type: array
+          items:
+            type: string
+        totalItems:
+          type: integer
+        currentItems:
+          type: integer
+        currentPage:
+          type: integer
+        nextPage:
+          type: integer
+        pageLength:
+          type: integer
   securitySchemes:
     apiKeyQuery:
       type: apiKey

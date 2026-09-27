@@ -400,66 +400,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Envelope'
 components:
-  schemas:
-    Details:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-        errorCode:
-          type: string
-        alerts:
-          type: array
-          items:
-            type: string
-        totalItems:
-          type: integer
-        currentItems:
-          type: integer
-        currentPage:
-          type: integer
-        nextPage:
-          type: integer
-        pageLength:
-          type: integer
-    Envelope:
-      type: object
-      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: object
-          additionalProperties: true
-          description: Result payload on success (structure varies per endpoint).
-        details:
-          $ref: '#/components/schemas/Details'
-    AddPatientRequest:
-      type: object
-      required:
-      - api_key
-      - first_name
-      - last_name
-      - date_of_birth
-      properties:
-        api_key:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        date_of_birth:
-          type: string
-          format: date
-        email:
-          type: string
-        client_notes:
-          type: string
-        alert_notes:
-          type: string
   parameters:
     LastModified:
       name: last_modified
@@ -484,6 +424,66 @@ components:
       schema:
         type: integer
         default: 1
+  schemas:
+    Envelope:
+      type: object
+      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          additionalProperties: true
+          description: Result payload on success (structure varies per endpoint).
+        details:
+          $ref: '#/components/schemas/Details'
+    Details:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorCode:
+          type: string
+        alerts:
+          type: array
+          items:
+            type: string
+        totalItems:
+          type: integer
+        currentItems:
+          type: integer
+        currentPage:
+          type: integer
+        nextPage:
+          type: integer
+        pageLength:
+          type: integer
+    AddPatientRequest:
+      type: object
+      required:
+      - api_key
+      - first_name
+      - last_name
+      - date_of_birth
+      properties:
+        api_key:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        email:
+          type: string
+        client_notes:
+          type: string
+        alert_notes:
+          type: string
   securitySchemes:
     apiKeyQuery:
       type: apiKey
