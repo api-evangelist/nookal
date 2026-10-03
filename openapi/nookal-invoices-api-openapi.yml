@@ -198,6 +198,21 @@ paths:
                 $ref: '#/components/schemas/Envelope'
 components:
   schemas:
+    Envelope:
+      type: object
+      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          additionalProperties: true
+          description: Result payload on success (structure varies per endpoint).
+        details:
+          $ref: '#/components/schemas/Details'
     Details:
       type: object
       properties:
@@ -219,21 +234,6 @@ components:
           type: integer
         pageLength:
           type: integer
-    Envelope:
-      type: object
-      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: object
-          additionalProperties: true
-          description: Result payload on success (structure varies per endpoint).
-        details:
-          $ref: '#/components/schemas/Details'
   securitySchemes:
     apiKeyQuery:
       type: apiKey
