@@ -1,22 +1,20 @@
-# Kin Score artifact — nookal — 2026-08-27T094438
+# Kin Score artifact — nookal — 2026-10-03T024842
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: nookal
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T094438
-  composite: 31.6
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T024842
+  composite: 36.2
   band: thin
   facets:
-    discoverability: 74.1
-    contract_quality: 11.9
-    governance: 0.0
-    operational_transparency: 31.6
-    developer_ergonomics: 38.1
-    commercial_clarity: 50.0
+    discoverability: 66.1
+    contract_quality: 43.0
     contract_governance: 0.0
-    access_clarity: 50.0
+    operational_transparency: 28.4
+    developer_ergonomics: 34.5
+    access_clarity: 46.8
   agent_readiness:
     score: 21.5
     band: agent-aware
@@ -44,12 +42,12 @@ kin_score:
     applies: true
     regime: Health
     regime_id: health
-    score: 15.0
+    score: 9.4
     matched_via: tags
   provenance:
     agentic_access: derived
     contracts:
       total: 5
-      derived: 5
-      coverage: 100.0
+      derived: 0
+      coverage: 0.0
       callable: 100.0
