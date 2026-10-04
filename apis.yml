@@ -197,6 +197,9 @@ apis:
   - type: APIReference
     url: https://api.nookal.com/dev/reference/verify
 common:
+- type: CapabilityMap
+  url: capabilities/nookal-capability-edges.yml
+  name: Nookal Business Capability Map
 - type: AgenticAccess
   url: agentic-access/nookal-agentic-access.yml
 - type: DomainSecurity
