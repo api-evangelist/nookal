@@ -61,7 +61,7 @@ tags_raw:
 - Physiotherapy
 - SaaS
 created: '2026-07-12'
-modified: '2026-07-12'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: nookal:nookal-appointments-api
@@ -197,6 +197,10 @@ apis:
   - type: APIReference
     url: https://api.nookal.com/dev/reference/verify
 common:
+- url: https://www.nookal.com/news
+  type: Blog
+- url: https://www.nookal.com/feed
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/nookal-capability-edges.yml
   name: Nookal Business Capability Map
