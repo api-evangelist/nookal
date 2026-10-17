@@ -401,21 +401,6 @@ paths:
                 $ref: '#/components/schemas/Envelope'
 components:
   schemas:
-    Envelope:
-      type: object
-      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: object
-          additionalProperties: true
-          description: Result payload on success (structure varies per endpoint).
-        details:
-          $ref: '#/components/schemas/Details'
     Details:
       type: object
       properties:
@@ -437,6 +422,21 @@ components:
           type: integer
         pageLength:
           type: integer
+    Envelope:
+      type: object
+      description: Standard Nookal JSON response envelope. On success, status is "success" and data carries the results object; on failure, status is "failure" and details carries errorMessage, errorCode, and alerts. Shape confirmed live against the verify and getLocations endpoints.
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          additionalProperties: true
+          description: Result payload on success (structure varies per endpoint).
+        details:
+          $ref: '#/components/schemas/Details'
     AddPatientRequest:
       type: object
       required:
@@ -461,21 +461,6 @@ components:
         alert_notes:
           type: string
   parameters:
-    LastModified:
-      name: last_modified
-      in: query
-      required: false
-      description: Return only records modified after this timestamp (incremental sync).
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      required: false
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        default: 1
     PageLength:
       name: page_length
       in: query
@@ -484,6 +469,21 @@ components:
       schema:
         type: integer
         default: 100
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        default: 1
+    LastModified:
+      name: last_modified
+      in: query
+      required: false
+      description: Return only records modified after this timestamp (incremental sync).
+      schema:
+        type: string
   securitySchemes:
     apiKeyQuery:
       type: apiKey
