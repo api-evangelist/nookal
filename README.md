@@ -1,4 +1,4 @@
-# Nookal (nookal)
+# Nookal
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,163 +64,128 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Nookal is Australian-built practice management software for allied health clinics - physiotherapy, chiropractic, podiatry, psychology, and similar disciplines - covering online bookings, multi-practitioner scheduling, patient and case records, treatment notes, invoicing, bulk billing, and clinic reporting. Nookal exposes a documented REST API that lets integrators read and write patients, cases, appointments, class bookings, availabilities, practitioners, locations, treatment notes, files, and invoices.
+Nookal is Australian-built practice management software for allied health clinics - physiotherapy, chiropractic, podiatry, psychology, and similar disciplines - covering online bookings, multi-practitioner scheduling, patient and case records, treatment notes, invoicing, bulk billing, and clinic reporting. Nookal exposes a documented REST API at https://api.nookal.com/production/v2/ that lets integrators read and write patients, cases, appointments, class bookings, availabilities, practitioners, locations, treatment notes, files, and invoices. The API is authenticated with an account-issued API key and returns JSON. API access is available on the paid Professional and Enterprise plans.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/nookal/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/nookal/refs/heads/main/apis.yml)
+**Areas:** Practice Management · Healthcare · Allied Health · Appointments · Scheduling · Patients · Clinics · Booking · Physiotherapy · Software-as-a-Service
 
-## Access Model (Read First)
+## Nookal on APIs.io
 
-- **Base URL:** `https://api.nookal.com/production/v2/` (confirmed live 2026-07-12).
-- **Authentication:** account-issued **API key**, passed as the `api_key` parameter - in the query string for GET requests and as a form field for POST requests. The key is created inside the Nookal application (Setup / Integrations) with a configurable access level. There is no OAuth flow and no Authorization header; the API key is the sole credential. Confirmed live: calling `/verify` without a key returns `{"status":"failure","details":{"errorCode":"L000_1","alerts":["Missing variable: api_key"]}}`.
-- **Plan gating:** API access is available on the paid **Professional** and **Enterprise** plans. It is **not** included in the entry-level Essentials tier. Getting a key is self-serve for an account admin on a qualifying plan.
-- **Format:** JSON, using a common envelope `{"status":"success"|"failure","data":{...},"details":{...}}`. Read endpoints paginate via `page`/`page_length` and support a `last_modified` incremental filter; `details` reports `totalItems`, `currentItems`, `currentPage`, and `nextPage`.
-- **Transport:** REST over HTTPS only. **No public WebSocket API** is documented (see `review.yml`).
+Everything profiled for Nookal is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nookal/](https://apis.io/providers/nookal/)** — or go straight to one of the APIs or properties below.
 
-## Real vs Modeled
+### APIs (5)
 
-- **Confirmed live** against the production host (`verify`, `getLocations`, `getPatients`) - base URL and the `api_key` auth requirement were verified by direct probes.
-- **Documented** paths, methods, and parameters for the remaining endpoints are taken from Nookal's public API reference at `https://api.nookal.com/dev/reference/*`. Nookal does **not** publish a machine-readable OpenAPI document, so the request/response body **shapes** in `openapi/nookal-openapi.yml` are **modeled** from the documented object reference and the confirmed live envelope. Verify field-level schemas against a live account before production use.
+- [Nookal Appointments API](https://apis.io/apis/nookal/nookal-appointments-api/) — Appointments, class bookings, availabilities, and the waiting list.
+- [Nookal Clinic API](https://apis.io/apis/nookal/nookal-clinic-api/) — Clinic reference data - locations, practitioners, and item/type lists.
+- [Nookal Invoices API](https://apis.io/apis/nookal/nookal-invoices-api/) — Invoices and their items, payments, credits, discounts, and refunds.
+- [Nookal Patients API](https://apis.io/apis/nookal/nookal-patients-api/) — Patient records, cases, treatment notes, and patient files.
+- [Nookal Verification API](https://apis.io/apis/nookal/nookal-verification-api/) — Verify that an API key is valid and connected to a Nookal account.
 
-## Tags
+### Published properties
 
-- Practice Management
-- Healthcare
-- Allied Health
-- Appointments
-- Scheduling
-- Patients
-- Clinics
-- Bookings
-- Physiotherapy
-- SaaS
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### Agentic access (1)
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## APIs
+- [Nookal Agentic Access](https://apis.io/agentic-access/nookal/nookal-agentic-access/)
 
-### Nookal Patients API
+#### Collections (6)
 
-Read and write patient records, cases, treatment notes, and patient files - list and search patients, add and edit patients, manage cases, retrieve and add treatment notes, upload and fetch files, and update Medicare / DVA details.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://api.nookal.com/dev/reference/patient](https://api.nookal.com/dev/reference/patient)
-- **Base URL:** `https://api.nookal.com/production/v2`
+- [Nookal API](https://apis.io/collections/nookal/open-nookal/)
+- [Nookal Appointments API](https://apis.io/collections/nookal/open-nookal-appointments-api/)
+- [Nookal Appointments Clinic API](https://apis.io/collections/nookal/open-nookal-clinic-api/)
+- [Nookal Appointments Invoices API](https://apis.io/collections/nookal/open-nookal-invoices-api/)
+- [Nookal Appointments Patients API](https://apis.io/collections/nookal/open-nookal-patients-api/)
+- [Nookal Appointments Verification API](https://apis.io/collections/nookal/open-nookal-verification-api/)
 
-#### Tags
+#### Security (2)
 
-- Patients
-- Cases
-- Treatment Notes
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Nookal Authentication](https://apis.io/security/nookal/nookal-authentication/)
+- [Nookal Domain Security](https://apis.io/security/nookal/nookal-domain-security/)
 
-- [Documentation](https://api.nookal.com/developers)
-- [API Reference](https://api.nookal.com/dev/reference/patient)
-- [OpenAPI](openapi/nookal-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nookal.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nookal.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Nookal Appointments API
+Published plans, tiers and prices.
 
-Retrieve appointments and query appointment and class availabilities, then create, update, cancel, and rebook appointment and class bookings. Also read class participants, class and service redemptions, and the waiting list.
+- [Nookal Plans Pricing](https://apis.io/plans/nookal/nookal-plans-pricing/)
 
-- **Human URL:** [https://api.nookal.com/dev/reference/appointment](https://api.nookal.com/dev/reference/appointment)
-- **Base URL:** `https://api.nookal.com/production/v2`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Appointments
-- Bookings
-- Scheduling
+- [Nookal Rate Limits](https://apis.io/rate-limits/nookal/nookal-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://api.nookal.com/developers)
-- [API Reference](https://api.nookal.com/dev/reference/appointment)
-- [OpenAPI](openapi/nookal-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nookal.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nookal.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Nookal Clinic API
+- [Nookal Finops](https://apis.io/finops/nookal/nookal-finops/)
 
-Retrieve clinic reference data - locations and logos, practitioners and photos, appointment types, class types, and the stock list - used to resolve the identifiers referenced across the Patients, Appointments, and Invoices APIs.
+## Where to find this API
 
-- **Human URL:** [https://api.nookal.com/dev/reference/location](https://api.nookal.com/dev/reference/location)
-- **Base URL:** `https://api.nookal.com/production/v2`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Locations
-- Practitioners
-- Reference Data
-
-#### Properties
-
-- [Documentation](https://api.nookal.com/developers)
-- [API Reference](https://api.nookal.com/dev/reference/location)
-- [OpenAPI](openapi/nookal-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nookal.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nookal.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Nookal Invoices API
-
-Create and read invoices and their line items, payments, credits, discounts, refunds, and adjustments. Add and delete invoice items and payments, add account credit, and retrieve financial breakdowns for billing and reconciliation.
-
-- **Human URL:** [https://api.nookal.com/dev/reference/invoices](https://api.nookal.com/dev/reference/invoices)
-- **Base URL:** `https://api.nookal.com/production/v2`
-
-#### Tags
-
-- Invoices
-- Payments
-- Billing
-
-#### Properties
-
-- [Documentation](https://api.nookal.com/developers)
-- [API Reference](https://api.nookal.com/dev/reference/invoices)
-- [OpenAPI](openapi/nookal-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nookal.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nookal.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Nookal Verification API
-
-Verify that an API key is valid and connected to a Nookal account before making further calls. Confirmed live at `/verify`, which returns a JSON status envelope and reports a missing or invalid `api_key`.
-
-- **Human URL:** [https://api.nookal.com/dev/reference/verify](https://api.nookal.com/dev/reference/verify)
-- **Base URL:** `https://api.nookal.com/production/v2`
-
-#### Tags
-
-- Verification
-- Authentication
-- API Key
-
-#### Properties
-
-- [Documentation](https://api.nookal.com/developers)
-- [API Reference](https://api.nookal.com/dev/reference/verify)
-- [OpenAPI](openapi/nookal-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nookal.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nookal.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Domain Security](security/nookal-domain-security.yml)
-- [Authentication](authentication/nookal-authentication.yml)
 - [Website](https://www.nookal.com)
 - [Documentation](https://api.nookal.com/developers)
-- [Sign Up](https://www.nookal.com/signup)
-- [Plans](plans/nookal-plans-pricing.yml)
 - [Pricing](https://www.nookal.com/pricing)
-- [Rate Limits](rate-limits/nookal-rate-limits.yml)
-- [Fin Ops](finops/nookal-finops.yml)
-- [LinkedIn](https://www.linkedin.com/company/nookal)
+- [Sign up](https://www.nookal.com/signup)
 - [Support](https://support.nookal.com)
+- [Blog](https://www.nookal.com/news)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 43.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 36.9 |
+| Access clarity | 18.4 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 9.4** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nookal/](https://apis.io/providers/nookal/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Nookal: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nookal/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
